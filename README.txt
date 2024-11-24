@@ -1,1 +1,1 @@
-test
+Psyche Rhythm Game Setup Instructions:
