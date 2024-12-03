@@ -626,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 771722252}
   - component: {fileID: 771722251}
-  - component: {fileID: 771722250}
+  - component: {fileID: 771722253}
   m_Layer: 0
   m_Name: asteroid example_0 (2)
   m_TagString: Untagged
@@ -634,20 +634,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &771722250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771722249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86eca29944e2e84d9f43a31a94f6425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beatTempo: 120
-  startPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &771722251
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -718,6 +704,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &771722253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771722249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86eca29944e2e84d9f43a31a94f6425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatTempo: 120
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1263376361
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 1438795546}
   - component: {fileID: 1438795545}
   - component: {fileID: 1438795544}
-  - component: {fileID: 1438795543}
+  - component: {fileID: 1438795547}
   m_Layer: 0
   m_Name: spacecraftSample_0 (2)
   m_TagString: Untagged
@@ -824,20 +824,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1438795543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438795542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e05b9dd008891408b16df44b8a48c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 1438795544}
-  startPosition: {x: 0, y: 0, z: 0}
 --- !u!50 &1438795544
 Rigidbody2D:
   serializedVersion: 5
@@ -935,6 +921,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1438795547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438795542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e05b9dd008891408b16df44b8a48c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody2D: {fileID: 1438795544}
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1685239899
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,7 +945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1685239902}
   - component: {fileID: 1685239901}
-  - component: {fileID: 1685239900}
+  - component: {fileID: 1685239903}
   m_Layer: 0
   m_Name: asteroid example_0 (1)
   m_TagString: Untagged
@@ -953,20 +953,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1685239900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1685239899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86eca29944e2e84d9f43a31a94f6425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beatTempo: 120
-  startPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &1685239901
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1037,6 +1023,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1685239903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685239899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86eca29944e2e84d9f43a31a94f6425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatTempo: 120
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2036947338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061021662}
   - component: {fileID: 2061021661}
-  - component: {fileID: 2061021660}
+  - component: {fileID: 2061021663}
   m_Layer: 0
   m_Name: asteroid example_0 (3)
   m_TagString: Untagged
@@ -1142,20 +1142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2061021660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061021659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86eca29944e2e84d9f43a31a94f6425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beatTempo: 120
-  startPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &2061021661
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1226,6 +1212,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2061021663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061021659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86eca29944e2e84d9f43a31a94f6425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatTempo: 120
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
