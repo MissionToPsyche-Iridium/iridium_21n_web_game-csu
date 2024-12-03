@@ -16,7 +16,7 @@ public class AsteroidScript : MonoBehaviour
     void Update()
     { 
         transform.position -= new Vector3(0, beatTempo * Time.deltaTime, 0f);
-        if ((transform.position - startPosition).magnitude > 18f)
+        if ((transform.position - startPosition).magnitude > 30f)
         {
                     transform.position = startPosition;
                     beatTempo = Random.Range(1, 5);
