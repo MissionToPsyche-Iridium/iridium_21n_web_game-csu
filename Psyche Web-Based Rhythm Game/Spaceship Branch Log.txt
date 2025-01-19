@@ -1,0 +1,23 @@
+1/19/2025
+Updated Movement Script
+
+Created a void function called "updateMovement" to avoid repetition. The function
+takes a float parameter. The parameter is the button which the user pressed.
+
+Created an "rotating animation" for the spaceship:
+
+Methods:
+
+ScaleTransform(IEnumerator for delay): This method runs a while loop that goes until the 
+duration is reached(.20 seconds in this case). Each iteration is saved and returned 
+as shown during the game due to both the method and its return type.
+
+Var t is the ratio of the elapsed time divided by duration. The final result is 1 which is used later.
+
+ElapsedTime += Time.DeltaTime adds time to ElapsedTime each iteration starting from 0. 
+Vector3.Lerp - takes 3 parameters. The first 2 parameters are used to interpolate between two points. These two points are: The beginning of the "initialScale" and "targetScale" 
+the last parameter, "t,"  is by how much we want to gradually move the object between those points. 
+As t increases from 0 to 1, it moves closer to "targetScale"
+Once t reaches 1, the transition/movement has ended. 
+
+ResetScale() function simply resets the localScale of the object to its initial state. 
