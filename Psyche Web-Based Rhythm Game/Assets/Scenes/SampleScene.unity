@@ -935,6 +935,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 1438795544}
   startPosition: {x: 0, y: 0, z: 0}
+  startScale: {x: 0, y: 0, z: 0}
+  targetScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1685239899
 GameObject:
   m_ObjectHideFlags: 0
