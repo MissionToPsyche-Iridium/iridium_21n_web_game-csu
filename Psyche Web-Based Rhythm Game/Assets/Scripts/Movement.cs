@@ -39,25 +39,5 @@ public class Movement : MonoBehaviour
         {
             rigidbody2D.transform.position = new Vector3(buttonF, startPosition.y, startPosition.z);
         }
-        /*
-        //rigidbody2D.linearVelocityY = 0;
-        if(Input.GetKeyDown(KeyCode.LeftArrow) )
-        {
-           // rigidbody2D.AddForceX(-100, ForceMode2D.Force);
-            rigidbody2D.transform.position = new Vector3(buttonA-=movementDistance, startPosition.y, startPosition.z);
-        }
-        if(Input.GetKeyUp(KeyCode.LeftArrow) && rigidbody2D.linearVelocityX != 0)
-        {
-           // rigidbody2D.linearVelocityX = 0;
-        }
-        if(Input.GetKeyDown(KeyCode.RightArrow))
-        {
-           // rigidbody2D.AddForceX(100, ForceMode2D.Force);
-           rigidbody2D.transform.position = new Vector3(buttonA+=movementDistance, startPosition.y, startPosition.z);
-        }
-         if(Input.GetKeyUp(KeyCode.RightArrow) && rigidbody2D.linearVelocityX != 0)
-        {
-          //  rigidbody2D.linearVelocityX = 0;
-        }*/
     }
 }

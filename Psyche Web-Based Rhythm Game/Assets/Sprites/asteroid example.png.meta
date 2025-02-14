@@ -159,7 +159,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      asteroid example_0: 3987369938513434759
+      asteroid example_1: 6294043894863557712
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

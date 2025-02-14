@@ -4,7 +4,7 @@ public class AsteroidScript : MonoBehaviour
 {
     public float beatTempo;
     public Vector3 startPosition;
-   // public bool hasStarted;
+    public bool hasStarted;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,11 +15,14 @@ public class AsteroidScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        transform.position -= new Vector3(0, beatTempo * Time.deltaTime, 0f);
+        if (hasStarted)
+        {
+            transform.position -= new Vector3(0, beatTempo * Time.deltaTime, 0f);
         if ((transform.position - startPosition).magnitude > 30f)
         {
                     transform.position = startPosition;
-                    beatTempo = Random.Range(1, 5);
+                   // beatTempo = Random.Range(1, 5);
+        }
         }
     }
 }
