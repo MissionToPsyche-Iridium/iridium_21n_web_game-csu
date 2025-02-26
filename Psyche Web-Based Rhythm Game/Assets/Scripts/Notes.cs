@@ -11,15 +11,15 @@ public class Notes: MonoBehaviour
 
     void Update()
     {
-        double timeSinceInstantiated = Manager.getAudioSourceTime() - timeInstantiated;
-        float t = (float)(timeSinceInstantiated / (Manager.Instance.noteTime * 2));
+        double timeSinceStart = Manager.getAudioSourceTime() - timeInstantiated;
+        float timeFactor = (float)(timeSinceStart / (1 * 2));
 
-        if (t > 1)
+        if (timeFactor > 1)
         {
             Destroy(gameObject);
         }
         else{
-            transform.localPosition = Vector3.Lerp(Vector3.up * Manager.Instance.spawnYCoordinate,Vector3.up * Manager.Instance.despawnYCoordinate, t);
+            transform.localPosition = Vector3.Lerp(Vector3.up * Manager.Instance.spawnYCoordinate,Vector3.up * Manager.Instance.despawnYCoordinate, timeFactor);
             GetComponent<SpriteRenderer>().enabled = true;
         }
     }

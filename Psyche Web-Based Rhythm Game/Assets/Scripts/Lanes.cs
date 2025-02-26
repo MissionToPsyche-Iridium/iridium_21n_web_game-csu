@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Lanes : MonoBehaviour
 {
-    public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName notePicked;
     public KeyCode input;
     public GameObject notePrefab;
     List<Notes> notes = new List<Notes>();
     public List<double> timeStamps = new List<double>();
-    int spawnIndex = 0;
+    int spawnCount = 0;
     int inputIndex = 0;
 
     void Start()
@@ -22,7 +22,7 @@ public class Lanes : MonoBehaviour
     {
         foreach(var note in array)
         {
-            if (note.NoteName == noteRestriction)
+            if (note.NoteName == notePicked)
             {
                 var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, Manager.midiFile.GetTempoMap());
                 timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f); //converting the tempo map(when hit was recorded) to seconds. For instance, the first tap/object to appear in Lane 1 will have a timestamp of 48 seconds, meaning it will reach the -3 Y Axis(where user supposed to tap) at that time precisely.
@@ -33,22 +33,22 @@ public class Lanes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawnIndex < timeStamps.Count)
+        if (spawnCount < timeStamps.Count)
         {
-            if(Manager.getAudioSourceTime () >= timeStamps[spawnIndex] - Manager.Instance.noteTime)
+            if(Manager.getAudioSourceTime () >= timeStamps[spawnCount] - 1) //replace notetime with 1?
             {
                 var note = Instantiate(notePrefab, transform);
                 notes.Add(note.GetComponent<Notes>());
-                note.GetComponent<Notes>().assignedTime = (float)timeStamps[spawnIndex];  
-                spawnIndex++;
+                note.GetComponent<Notes>().assignedTime = (float)timeStamps[spawnCount];  
+                spawnCount++;
             }
         }
 
-        if(inputIndex < timeStamps.Count)//Everytime the user taps/presses a key, it is 1 input index. If the amount of
+        if(inputIndex < timeStamps.Count)
         {
             double timeStamp = timeStamps[inputIndex];
             double marginOfError = Manager.Instance.marginOfError;
-            double audioTime = Manager.getAudioSourceTime() - (0/1000.0);
+            double audioTime = Manager.getAudioSourceTime();
 
             if(Input.GetKeyDown(input))
             {
@@ -58,14 +58,10 @@ public class Lanes : MonoBehaviour
                         Destroy(notes[inputIndex].gameObject);
                         inputIndex++;
                 }
-                else{
-              //      print($"Hit inaccurate on {inputIndex} note ");
-                }
             }
             if(timeStamp + marginOfError <= audioTime)
             {
                 Miss();
-              //  print($"Missed {inputIndex} Note");
                 inputIndex++;
             }
 

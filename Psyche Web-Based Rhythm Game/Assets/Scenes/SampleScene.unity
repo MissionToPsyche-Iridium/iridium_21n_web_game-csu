@@ -156,8 +156,8 @@ MonoBehaviour:
   theSong: {fileID: 449750245}
   marginOfError: 0.2
   noteTime: 1
-  noteSpawnY: 7
-  noteTapY: -3
+  spawnYCoordinate: 0
+  tapYCoordinate: 0
   startPlaying: 0
   functionCalled: 0
   clip:
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4adf73435874764e94fabb2524134a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteRestriction: 5
+  notePicked: 5
   input: 100
   notePrefab: {fileID: 4863851754018935763, guid: 692e676445af2074bba368de7fb48bbd, type: 3}
   timeStamps: []
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4adf73435874764e94fabb2524134a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteRestriction: 4
+  notePicked: 4
   input: 115
   notePrefab: {fileID: 6069541773798016832, guid: f28abd3e31f6f61458a173313710cbee, type: 3}
   timeStamps: []
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4adf73435874764e94fabb2524134a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteRestriction: 2
+  notePicked: 2
   input: 97
   notePrefab: {fileID: 634584060144859909, guid: 16cd72fb8e76193488f2b67fbfeceeb1, type: 3}
   timeStamps: []
@@ -832,7 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4adf73435874764e94fabb2524134a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteRestriction: 7
+  notePicked: 7
   input: 102
   notePrefab: {fileID: 6296341197559111487, guid: 0589d3e9295d36a41af05997d7042018, type: 3}
   timeStamps: []

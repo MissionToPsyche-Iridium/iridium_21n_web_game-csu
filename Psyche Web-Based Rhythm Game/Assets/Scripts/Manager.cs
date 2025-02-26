@@ -9,7 +9,7 @@ public class Manager : MonoBehaviour
     public AudioSource theSong;
     public double marginOfError;
     private string[] midiName = {"day50.mid", "day69.mid", "day15.mid"};
-    public float noteTime;
+    //public float noteTime;
     public float spawnYCoordinate;
     public float tapYCoordinate;
     public bool startPlaying;
@@ -28,7 +28,7 @@ public class Manager : MonoBehaviour
     public static MidiFile midiFile;
     void Start() 
     {
-        noteTime = 1;
+      //  noteTime = 1;
         tapYCoordinate = -3;
         spawnYCoordinate = 7;
         marginOfError = 0.25;

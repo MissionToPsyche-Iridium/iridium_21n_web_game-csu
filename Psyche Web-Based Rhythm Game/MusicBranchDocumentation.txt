@@ -1,0 +1,171 @@
+Added the following to the project:
+1) Lane.cs script
+2) Edited Manager.cs script
+3) added Notes.cs script
+4) Created "Prefabs" folder to stores notes
+5) Added Malanchall library to read Midi files
+6) Created "StreamingAssets" folder  to store midi files
+---------------------------------
+Manager.cs script:
+
+Created the following variables:
+
+1) Instance: to refer to the class itself
+2) lanes array: utilized to call the array in of lanes.cs script
+3) theSong: A variable utilized to control the song currently playing
+4) marginofError: A variable utilized to adjust the margin of error when
+a user presses the key. Currently, the user has to press the key as the
+note approached -3 y-axis position, but we a +/-.25 margin of error. Higher 
+is more forgiving, while smaller than .25 is more accurate/unforgiving.
+5) midiName: This is a string array to store the name of the midi files utilized each level
+6) noteTime: Adjust the timing in which the note falls. **Leave it at 1 for accuracy.**
+Adjusting this variable higher than 1 will slow down the notes which will cause them
+to be out of sync with the rhythm.
+7) spawnYCoordinate: This is the coordinate in which the notes will spawn.
+Currently the notes will spawn at 7 y-axis after being destroyed. I suggest leaving 
+it as is.
+8) tapYCoordinate: This dictates at what position it would be correct for the user to tap;
+for example, currently it is set at -3 y-axis, so if the user taps "A" for lane 1
+when the note is at -3 y-axis, then it will marked as a hit. Margin of error allows
+some room for flexbility.
+9) startPlaying: A boolean that is false by default. This is turned to turn when
+the music start playing and later used in a function
+10) level: a int variable utilized to determine the current level the user is at
+11) midiLevel: a int array to determine which midi file to play for each level
+12) clip: an audioClip array which determines which song to play depending on the level passed as an argument.
+13) despawnYCoordinate: A variable that determines when the note should despawn;
+for instance, if the tap y coordinate is -3, spawnYCoordinate is 7, then
+the note will despawn at (-3 - (7-(-3))) = -13 y axis if they are not hit on time
+14) midiFile: A variable created to store the current midi file being read
+
+Functions:
+
+Void Start()
+In here we have manually set the following variable as they do not need to be changed throughout the change:
+1) noteTime = 1 // speed of noteTime
+2) tapYCoordinate = -3 // user taps at -3 y-axis
+3) spawnYCoordinate = 7 // notes spawn at 7 y-axis
+4) marginOfError = 0.25 // margin of +/-0.25 for -3 y-axis taps (-2.75~-3.25)
+5) Instance = this // assigning the instance to itself to access the object's properties and methods
+
+void ReadFromFile()
+In here we are reading the current midiFili assigned:
+- Midi.Read(Application.StreamingAssetsPath) is telling unity that the files are inside the streamingAssets folder
+- Then we utilized midiName[midiLevel] to assign which midi file we want to read;
+for example, if we are in level 0, then we want to read the very first midi file
+which is stored at midiName[0] (In this case, "day50.mid")
+- Finally, we increment midiLevel as this function won't be called until the current level is finalized.
+
+void getDataFromMidi()
+- We created a notes variable to store the read notes from the midi file
+- We created an array to store the read notes into the array
+- Then we made a for loop to fill the timestamps which will we go over inside the Lanes.cs script file
+- Finally, we want to invoke "StartSong" to start the song with 0 delay milliseconds
+
+static double getAudioSourceTime()
+- In here we try to get the current playback time of the audio currently playing in seconds
+- theSong.timeSamples is the number of audio samples that have been played since the start
+- theSong.clip.frequency is the sample rate of the audio clip
+- We divide this two variables to get the sample count into seconds. sample count / sample rate
+- Necessary to get precise note timing so that it is in sync with the song
+
+void startSong()
+- function created to start the assigned song once called
+
+void startGame(bool functionCall)
+- In here, we are passing the argument functionCall to determine if we want to run the if code()
+this is done to ensure that this code is ran once each level. 
+- The argument is set to false by default, if false, then we enter the if statement and set it to true until the level is over.
+- After entering the if-statement block, we assign the current song to the current level of the startGame
+- We start playing the song
+- We start reading the data from the midi file
+- Finally we increase the level by 1.
+
+void checkSong()
+- function created to check the current level and status of the song
+- In here, we want to check two things: if the song is over and if the level is below 3
+- if one of the conditions above is not met, then we don't do anything (as of 2/24)
+- if both conditions are met, then we want to check what level the player is at and the state of functionCalled
+- if functionCalled is true and level is 1, then we want to move to the next level. Otherwise, don't.
+
+void nextLevel()
+- In here we are assigning functionCalled to false again as we are ending the current level then going to the next
+- We let the user know to press the Enter/Return key to start the next level
+- If the user press the return key, we call startGame function while passing functionCalled as a parameter
+
+void Update()
+- As every other unity project, the update function is a constant function that runs repeated every frame
+- Because it is repeated running, we made it so that it only calls functions if conditions are met
+- If the user press the return key, we start the game (This is done at the beginning before NextLevel() is called)
+- Then we also check the current level of the game. If it's between 0 to 3, then we want to call checkSong with a delays of 0.01f(so that things are in sync)
+
+------------------
+
+Note.cs Script:
+
+Created the following variables:
+
+1) timeInstantiated: A variabled utilized to store the actual time of the song in milliseconds from manager.checkSong
+2) assignedTime: A variabled utilized to assign the times in which the notes are supposed to be pressed
+
+functions
+
+void Start()
+- We assign a value to timeInstantiated right away to obtain the time when the song was timeInstantiated
+
+void Update()
+- timeSinceStart: As the name implies, this record the current value of when the song started in milliseconds. This function is called every frame
+- timeFactor: For each note we want to keep the timeFactor below 1, if it's above 1, we want to destroy the note.
+We want to multiply by 2 because noteTime takes into account both spawn and despawn Y-axis.
+- if-statement: here we check if timeFactor is greater than 1, if it is we want to destroy it
+we use vector3.Lerp to determine its position where 0 is its spawn and 1 is its despawn, anything greater than 1 is destroyed.
+- The GetComponent<SpriteRenderer> basically assures that the notes are being shown at the right time and right position
+
+
+------------
+
+Lane.cs script
+Created the following variables:
+1) notePicked: This is a public variable which determine which note we should be looking at, in this case, 
+I made the midi using the following notes: D4, E4, F4, and  G4. 
+2) Input: This is a variable that allows the user to select which input they would like to use.
+As of right now, the input are as follows: Lane 1 for D4: key A, Lane 2 for E4: Key S,
+Lane 3 for F4: Key D, Lane 4 for G4: key F
+3) notePrefab: This is a gameObject variable that attaches each lane with its
+respective note. 
+4) notes: This is a variable that calls to the list in Notes.cs. We will filling 
+the list with the gameobjects obtained inside the notePrefab.
+5) timeStamps: Another list that assigns that time to each note according to when they should be pressed.
+Time is in seconds.
+6) spawnCount: An integer keeping track of the spawning notes count for each lane and to determine which note should be spawned.
+7) inputIndex: An integer to find out if the player hit the note in time according to the timestamps
+
+functions
+
+void setTimeStamps()
+- A for loop idetifying the note name of the midi and comparing it to the note picked. 
+It will run through all the notes in the midi until we get the one we need.
+Once the statement is true, we convert the midi map into metric time span by converting it.
+- Once we converted into metric time span, we add it into the timeStamp list as seconds.
+
+void Update ()
+- Throughout the entirity of the game we check if spawnCount is less than the timeStampCount
+We are basically controlling the when we want the notes to be added to each lane.
+This is why when changing noteTime to anything greater than 1 will slow/speed the
+way notes spawn. I have commented out noteTime Variable and replaced every instance of it with the value of 1
+- we created a variable an assign it the note inside the notePrefab folder
+- Then we add that note along with it assigned time(when the note should be pressed)
+- We add the spawnCount for each note added for each lane.
+- inside the if statement if(inputIndex < timeStampsCount) we want to check
+if the player is hitting on time or if he misses.
+- We assign the timeStamp, audioTime, and MarginOfError to verify whether the user hit on time
+- In other words, the entire block if-statement checks the song's time and compares it
+to the timeStamp of each note. If they match (including margin of error) is a hit, if not, is a miss.
+
+----------------------------
+Updates
+
+As of 2.26.2025 I commented out noteTime and replaced every instance of it with the value of 1.
+Reasoning: It is not a value expected to be changed or should be changed.
+
+
