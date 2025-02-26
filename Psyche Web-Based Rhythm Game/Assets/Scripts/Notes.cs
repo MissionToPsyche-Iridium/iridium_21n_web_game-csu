@@ -12,7 +12,7 @@ public class Notes: MonoBehaviour
     void Update()
     {
         double timeSinceStart = Manager.getAudioSourceTime() - timeInstantiated;
-        float timeFactor = (float)(timeSinceStart / (1 * 2));
+        float timeFactor = (float)(timeSinceStart / (1 * 2)); //greater than 1 slows the notes down. Do not change
 
         if (timeFactor > 1)
         {

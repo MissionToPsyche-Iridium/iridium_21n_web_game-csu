@@ -35,7 +35,7 @@ public class Lanes : MonoBehaviour
     {
         if (spawnCount < timeStamps.Count)
         {
-            if(Manager.getAudioSourceTime () >= timeStamps[spawnCount] - 1) //replace notetime with 1?
+            if(Manager.getAudioSourceTime () >= timeStamps[spawnCount] - 1) //replaced noteTime with 1. Greater than 1 messes with the spawn of the note. If changed and everything else the same, this will cause the notes to come down a lot faster
             {
                 var note = Instantiate(notePrefab, transform);
                 notes.Add(note.GetComponent<Notes>());

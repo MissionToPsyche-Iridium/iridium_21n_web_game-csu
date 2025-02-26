@@ -18,7 +18,7 @@ a user presses the key. Currently, the user has to press the key as the
 note approached -3 y-axis position, but we a +/-.25 margin of error. Higher 
 is more forgiving, while smaller than .25 is more accurate/unforgiving.
 5) midiName: This is a string array to store the name of the midi files utilized each level
-6) noteTime: Adjust the timing in which the note falls. **Leave it at 1 for accuracy.**
+6) noteTime: Adjust the timing in which the note falls and when it spawns. **Leave it at 1 for accuracy.**
 Adjusting this variable higher than 1 will slow down the notes which will cause them
 to be out of sync with the rhythm.
 7) spawnYCoordinate: This is the coordinate in which the notes will spawn.
@@ -42,7 +42,7 @@ Functions:
 
 Void Start()
 In here we have manually set the following variable as they do not need to be changed throughout the change:
-1) noteTime = 1 // speed of noteTime
+1) noteTime = 1 // speed of notes as in when they spawn/added and its timestamps, likely removed in future
 2) tapYCoordinate = -3 // user taps at -3 y-axis
 3) spawnYCoordinate = 7 // notes spawn at 7 y-axis
 4) marginOfError = 0.25 // margin of +/-0.25 for -3 y-axis taps (-2.75~-3.25)
@@ -116,7 +116,7 @@ void Start()
 void Update()
 - timeSinceStart: As the name implies, this record the current value of when the song started in milliseconds. This function is called every frame
 - timeFactor: For each note we want to keep the timeFactor below 1, if it's above 1, we want to destroy the note.
-We want to multiply by 2 because noteTime takes into account both spawn and despawn Y-axis.
+We want to multiply by 2 because we need to take into account both spawn and despawn Y-axis.
 - if-statement: here we check if timeFactor is greater than 1, if it is we want to destroy it
 we use vector3.Lerp to determine its position where 0 is its spawn and 1 is its despawn, anything greater than 1 is destroyed.
 - The GetComponent<SpriteRenderer> basically assures that the notes are being shown at the right time and right position
