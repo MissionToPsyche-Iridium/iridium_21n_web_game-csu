@@ -18,6 +18,8 @@ public class Manager : MonoBehaviour
     private int midiLevel =0;
     public AudioClip[] clip;
 
+    public static int pointStreak = 0;
+
       public float despawnYCoordinate
     {
         get{
@@ -104,6 +106,18 @@ public class Manager : MonoBehaviour
         {
             startGame(functionCalled);
         }
+    }
+
+       public static void Hit()
+    {
+        pointStreak++;
+        Debug.Log($"You hit!! Streak: {pointStreak}");
+    }
+
+    public static void Miss()
+    {
+        pointStreak = 0;
+        Debug.Log($"You missed! Streak reset.");
     }
     void Update() {
 
