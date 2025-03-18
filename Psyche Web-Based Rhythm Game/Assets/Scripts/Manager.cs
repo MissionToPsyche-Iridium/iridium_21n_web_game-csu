@@ -1,6 +1,10 @@
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
+using System.Collections;
+using UnityEngine.Networking;
+using System.IO;
+using System;
 
 public class Manager : MonoBehaviour
 {
@@ -14,9 +18,12 @@ public class Manager : MonoBehaviour
     public float tapYCoordinate;
     public bool startPlaying;
     public bool functionCalled;
-    private int level = 0;
-    private int midiLevel =0;
-    public AudioClip[] clip;
+    public bool readFromWeb;
+    private static int level = 0;
+    private static int midiLevel =0;
+    public  AudioClip[] clip;
+
+    public MidiFile[] loadedMidis;
 
     public static int pointStreak = 0;
 
@@ -36,17 +43,67 @@ public class Manager : MonoBehaviour
         marginOfError = 0.25;
         Instance = this;
         print($"Press Return/Enter to start the Game!");
+        if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
+        {
+            StartCoroutine(loadStreamingAsset());
+            readFromWeb = true;
+        }
+        else
+        {
+            ReadFromFile();
+        }
     }
 
+   private IEnumerator loadStreamingAsset()
+{
+    string fullPath1 = Application.streamingAssetsPath + "/" + midiName[0];
+    string fullPath2 = Application.streamingAssetsPath + "/" + midiName[1];
+    string fullPath3 = Application.streamingAssetsPath + "/" + midiName[2];
+   // Debug.Log("Loading MIDI from: " + fullPath);
+  //  Debug.Log($"Loading MIDI: {midiName[midiLevel]} at index {midiLevel}");
+    string[] paths = { fullPath1, fullPath2, fullPath3 };
+    int i = 0;
+    foreach(string path in paths)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(path))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error loading MIDI: " + www.error);
+            }
+        else
+            {
+                byte[] results = www.downloadHandler.data;
+                using (MemoryStream stream = new MemoryStream(results))
+                {
+                    loadedMidis[i] = MidiFile.Read(stream); //stream how does it work?
+                }
+            }
+        }
+        i++;
+    }
+}
     private void ReadFromFile()
     {
-        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiName[midiLevel]);        
-        midiLevel++;     
+        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiName[midiLevel]);                  
     }
 
     public void getDataFromMidi()
-    {
-        
+    { 
+        if(readFromWeb && level == 0)
+        {
+            midiFile = loadedMidis[0];
+        }
+        else if(readFromWeb && level == 1)
+        {
+            midiFile = loadedMidis[1];
+        }
+         else if(readFromWeb && level == 2)
+        {
+            midiFile = loadedMidis[2];
+        }
         var notes = midiFile.GetNotes();
         var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
         notes.CopyTo(array,0);
@@ -72,29 +129,45 @@ public class Manager : MonoBehaviour
 
     public void startGame(bool functionCall)
     {
+         
          if(!functionCall)
                 {
-                    ReadFromFile();
-                    theSong.clip = clip[level];
-                    startPlaying = true;
-                    functionCalled = true;
-                    getDataFromMidi();
-                    level++;
+                    if(level != 0) //To ensure the correct midi level is being used.
+                    {
+                        midiLevel++;
+                    }           
+                       StartCoroutine(StartGameCoroutine());   //runs asynchronously if calling it directly, switched to IEnumerator to wait for its return.              
                 }            
+    }
+
+    private IEnumerator StartGameCoroutine()
+    {
+        if (readFromWeb)
+        {
+            yield return StartCoroutine(loadStreamingAsset()); // Wait for MIDI files to load
+        }
+        else
+        {
+            ReadFromFile();
+        }
+        getDataFromMidi(); 
+        theSong.clip = clip[level];
+        startPlaying = true;
+        functionCalled = true;
+        level++;
     }
 
     private void checkSong()
     {
-        if (!theSong.isPlaying && level < 3)
+        if(level < 3)
         {
-            if(level == 1 && functionCalled)
+        if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length)) //Changed to compare current duration to audio length, previous code caused issues where it would end if user switched tabs/paused the music in unintended ways
+        {
+            if(functionCalled)
             {
                 nextLevel();
-            }
-            else if (level == 2 && functionCalled)
-            {
-               nextLevel();
-            }    
+            }  
+        }
         }
     }
 
@@ -108,16 +181,16 @@ public class Manager : MonoBehaviour
         }
     }
 
-       public static void Hit()
+    public static void Hit()
     {
         pointStreak++;
-        Debug.Log($"You hit!! Streak: {pointStreak}");
+        Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
     }
 
     public static void Miss()
     {
         pointStreak = 0;
-        Debug.Log($"You missed! Streak reset.");
+        Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {Instance.functionCalled} ");
     }
     void Update() {
 
