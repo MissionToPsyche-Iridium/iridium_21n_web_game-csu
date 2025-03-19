@@ -59,8 +59,6 @@ public class Manager : MonoBehaviour
     string fullPath1 = Application.streamingAssetsPath + "/" + midiName[0];
     string fullPath2 = Application.streamingAssetsPath + "/" + midiName[1];
     string fullPath3 = Application.streamingAssetsPath + "/" + midiName[2];
-   // Debug.Log("Loading MIDI from: " + fullPath);
-  //  Debug.Log($"Loading MIDI: {midiName[midiLevel]} at index {midiLevel}");
     string[] paths = { fullPath1, fullPath2, fullPath3 };
     int i = 0;
     foreach(string path in paths)
@@ -78,7 +76,7 @@ public class Manager : MonoBehaviour
                 byte[] results = www.downloadHandler.data;
                 using (MemoryStream stream = new MemoryStream(results))
                 {
-                    loadedMidis[i] = MidiFile.Read(stream); //stream how does it work?
+                    loadedMidis[i] = MidiFile.Read(stream); 
                 }
             }
         }
@@ -132,11 +130,11 @@ public class Manager : MonoBehaviour
          
          if(!functionCall)
                 {
-                    if(level != 0) //To ensure the correct midi level is being used.
+                    if(level != 0) 
                     {
                         midiLevel++;
                     }           
-                       StartCoroutine(StartGameCoroutine());   //runs asynchronously if calling it directly, switched to IEnumerator to wait for its return.              
+                       StartCoroutine(StartGameCoroutine());            
                 }            
     }
 
@@ -144,7 +142,7 @@ public class Manager : MonoBehaviour
     {
         if (readFromWeb)
         {
-            yield return StartCoroutine(loadStreamingAsset()); // Wait for MIDI files to load
+            yield return StartCoroutine(loadStreamingAsset()); 
         }
         else
         {
@@ -161,7 +159,7 @@ public class Manager : MonoBehaviour
     {
         if(level < 3)
         {
-        if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length)) //Changed to compare current duration to audio length, previous code caused issues where it would end if user switched tabs/paused the music in unintended ways
+        if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
         {
             if(functionCalled)
             {
