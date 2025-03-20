@@ -5,6 +5,8 @@ using System.Collections;
 using UnityEngine.Networking;
 using System.IO;
 using System;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -22,7 +24,10 @@ public class Manager : MonoBehaviour
     private static int level = 0;
     private static int midiLevel =0;
     public  AudioClip[] clip;
+    public Image healthBar;
 
+
+    public float satelliteFuel = 100f;
     public MidiFile[] loadedMidis;
 
     public static int pointStreak = 0;
@@ -51,6 +56,32 @@ public class Manager : MonoBehaviour
         else
         {
             ReadFromFile();
+        }
+    }
+
+    public void useFuel()
+    {
+        if(satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
+        {
+            satelliteFuel--;
+            if(satelliteFuel < 0)
+            {
+                satelliteFuel = 0;
+            }
+            healthBar.fillAmount = satelliteFuel / 100f;
+        }
+    }
+
+    public void gainFuel()
+    {
+        if(satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
+        {
+            satelliteFuel += 2;
+            if(satelliteFuel > 100)
+            {
+                satelliteFuel = 100;
+            }
+            healthBar.fillAmount = satelliteFuel / 100f;
         }
     }
 
@@ -182,6 +213,7 @@ public class Manager : MonoBehaviour
     public static void Hit()
     {
         pointStreak++;
+        Instance.gainFuel();
         Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
     }
 
@@ -196,9 +228,14 @@ public class Manager : MonoBehaviour
             {            
                 startGame(functionCalled);             
             }
-            if(level > 0 && level < 3)
+            if(level > 0 && level < 3 && satelliteFuel != 0)
             {
                 Invoke(nameof(checkSong), 0.01f);
+            }
+            if(satelliteFuel == 0)
+            {
+                Debug.Log("Game Over!!");
+                //change to menu/scene
             }
     }
 }
