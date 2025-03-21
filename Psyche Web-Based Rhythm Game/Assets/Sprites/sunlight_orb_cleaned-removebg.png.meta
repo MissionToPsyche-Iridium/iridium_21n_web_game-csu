@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e01f6f56c207bc042b45521cb60484f7
+guid: b4105886d55a26f48923156a136af285
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2847513131564255240
-    second: letter-145998_1280_0
+      213: 5105880205056009390
+    second: sunlight_orb_cleaned-removebg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: letter-145998_1280_0
+      name: sunlight_orb_cleaned-removebg_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1101
-        height: 1280
+        x: 76
+        y: 65
+        width: 382
+        height: 387
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 808c52c3b16648720800000000000000
-      internalID: 2847513131564255240
+      spriteID: ea4ef009efabbd640800000000000000
+      internalID: 5105880205056009390
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      letter-145998_1280_0: 2847513131564255240
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
