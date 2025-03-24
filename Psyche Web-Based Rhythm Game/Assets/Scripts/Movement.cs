@@ -7,7 +7,12 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rigidbody2D;
     public Vector3 startPosition;
     public Vector3 startScale;
-    private float movementDistance = 5f;
+
+    private GameObject lane1;
+    private GameObject lane2;
+    private GameObject lane3;
+    private GameObject lane4;
+    private float movementDistance = 500f;
     private float buttonA;
     private float buttonS;
     private float buttonD;
@@ -19,14 +24,23 @@ public class Movement : MonoBehaviour
     void Start()
     {       
         startPosition = rigidbody2D.transform.position;
-        buttonS = startPosition.x; //use this variable as Vector3 can't use math functionsbecause it transform them into string resulting in rounding; example: 0.144+= 5 will reseult in 5 not 5.144
-        buttonA = buttonS-movementDistance;
-        buttonD = buttonS+movementDistance;
-        buttonF = buttonD+movementDistance;
+        
         duration = .20f;
         startScale = rigidbody2D.transform.localScale;
         targetScale = new Vector3(-startScale.x, startScale.y, startScale.z);
+         //use this variable as Vector3 can't use math functionsbecause it transform them into string resulting in rounding; example: 0.144+= 5 will reseult in 5 not 5.144
+        
+        lane1 = GameObject.Find("Lane1"); // Ensure the name matches the Hierarchy
+        lane2 = GameObject.Find("Lane2");
+        lane3 = GameObject.Find("Lane3");
+        lane4 = GameObject.Find("Lane4");
+        buttonA = lane1.transform.position.x;
+        buttonD = lane3.transform.position.x;
+        buttonF = lane4.transform.position.x;
+        buttonS = lane2.transform.position.x;
     }
+
+    
 
 // rotates the spaceship along its x-axis for .2 seconds. 
      private IEnumerator ScaleTransform()
@@ -53,6 +67,7 @@ public class Movement : MonoBehaviour
 // Updates movement of the spaceship according to the button pressed. The button is passed as a parameter. 
     public void updateMovement(float direction)
     {
+        
         rigidbody2D.transform.position = new Vector3(direction, startPosition.y, startPosition.z);
     }
 
