@@ -12,25 +12,20 @@ public class Movement : MonoBehaviour
     private GameObject lane2;
     private GameObject lane3;
     private GameObject lane4;
-    private float movementDistance = 500f;
     private float buttonA;
     private float buttonS;
     private float buttonD;
     private float buttonF;
     private float duration;
     public Vector3 targetScale;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start()
     {       
         startPosition = rigidbody2D.transform.position;
-        
         duration = .20f;
         startScale = rigidbody2D.transform.localScale;
         targetScale = new Vector3(-startScale.x, startScale.y, startScale.z);
-         //use this variable as Vector3 can't use math functionsbecause it transform them into string resulting in rounding; example: 0.144+= 5 will reseult in 5 not 5.144
-        
-        lane1 = GameObject.Find("Lane1"); // Ensure the name matches the Hierarchy
+        lane1 = GameObject.Find("Lane1"); 
         lane2 = GameObject.Find("Lane2");
         lane3 = GameObject.Find("Lane3");
         lane4 = GameObject.Find("Lane4");

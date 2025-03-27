@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sunlight_orb_cleaned-removebg_0: 5105880205056009390
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

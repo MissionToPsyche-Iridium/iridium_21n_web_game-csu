@@ -44,7 +44,7 @@ public class Manager : MonoBehaviour
     {
       //  noteTime = 1;
         tapYCoordinate = -271;
-        spawnYCoordinate = 600;
+        spawnYCoordinate = 400;
         marginOfError = 0.25;
         Instance = this;
         print($"Press Return/Enter to start the Game!");
