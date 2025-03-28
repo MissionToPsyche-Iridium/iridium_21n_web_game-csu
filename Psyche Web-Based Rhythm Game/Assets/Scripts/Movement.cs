@@ -7,28 +7,35 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rigidbody2D;
     public Vector3 startPosition;
     public Vector3 startScale;
-    private float movementDistance = 5f;
+
+    private GameObject lane1;
+    private GameObject lane2;
+    private GameObject lane3;
+    private GameObject lane4;
     private float buttonA;
     private float buttonS;
     private float buttonD;
     private float buttonF;
     private float duration;
-    
     public Vector3 targetScale;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start()
-    {
+    {       
         startPosition = rigidbody2D.transform.position;
-        buttonS = startPosition.x; //use this variable as Vector3 can't use math functionsbecause it transform them into string resulting in rounding; example: 0.144+= 5 will reseult in 5 not 5.144
-        buttonA = buttonS-movementDistance;
-        buttonD = buttonS+movementDistance;
-        buttonF = buttonD+movementDistance;
         duration = .20f;
         startScale = rigidbody2D.transform.localScale;
         targetScale = new Vector3(-startScale.x, startScale.y, startScale.z);
-        
+        lane1 = GameObject.Find("Lane1"); 
+        lane2 = GameObject.Find("Lane2");
+        lane3 = GameObject.Find("Lane3");
+        lane4 = GameObject.Find("Lane4");
+        buttonA = lane1.transform.position.x;
+        buttonD = lane3.transform.position.x;
+        buttonF = lane4.transform.position.x;
+        buttonS = lane2.transform.position.x;
     }
+
+    
 
 // rotates the spaceship along its x-axis for .2 seconds. 
      private IEnumerator ScaleTransform()
@@ -47,18 +54,18 @@ public class Movement : MonoBehaviour
     }
 
 // resets the x local scale of the spaceship to the original to allow an "animation" of the it rotation on its x axis. 
-    void resetScale()
+    public void resetScale()
     {
         rigidbody2D.transform.localScale = startScale;
     }
 
 // Updates movement of the spaceship according to the button pressed. The button is passed as a parameter. 
-    void updateMovement(float direction)
+    public void updateMovement(float direction)
     {
+        
         rigidbody2D.transform.position = new Vector3(direction, startPosition.y, startPosition.z);
     }
 
-    
 
     // Update is called once per frame
     void Update()
@@ -67,25 +74,29 @@ public class Movement : MonoBehaviour
         {
             updateMovement(buttonA);
             resetScale();
-            StartCoroutine(ScaleTransform());        
+            StartCoroutine(ScaleTransform());   
+            Manager.Instance.useFuel();    
         }
         if(Input.GetKeyDown(KeyCode.S))
         {
             updateMovement(buttonS);
             resetScale();
             StartCoroutine(ScaleTransform());  
+            Manager.Instance.useFuel(); 
         }
         if(Input.GetKeyDown(KeyCode.D))
         {
             updateMovement(buttonD);
             resetScale();
             StartCoroutine(ScaleTransform());  
+            Manager.Instance.useFuel(); 
         }
         if(Input.GetKeyDown(KeyCode.F))
         {
             updateMovement(buttonF);
             resetScale();
             StartCoroutine(ScaleTransform());  
+            Manager.Instance.useFuel(); 
         }
     }
 }

@@ -1,0 +1,57 @@
+Changed/added to Manager.cs to make website functionaility work(3/18/2025):
+new variables added:
+1) readFromWeb: A boolean separate web call from the other one. This will ensure
+that the files and functions created for the web will be utilized
+2) loadedMidis: A MidiFile array that works to stores all the midifiles as soon as it is
+called. This array currently stores 3 indexes/3 midifiles
+3) pointStreak: A integer created to keep help with the score development
+
+functions:
+
+void start()
+- added a small code of block that detects whether the application needs to read from file or make a request.
+If application is a website, then it will call the function "loadstreamingAsset" which was created
+to aid the website hosting
+
+IEnumerator loadstreamingAsset()
+-Added 3 strings for each paths, this is done to pre-load all the necessary
+files before the game starts. This potentially increases initial loading time,
+but reduces delays/loading(if any) during gameplay. 
+Then we utilized a foreach loop that will go through each string or "path" by sending
+a request and storing their respective byte array into the memory stream which is later 
+read and loaded into the midi arrays. This repeats 3 times. 
+- The function is IEnumerator because want later call this function using "yield return" 
+which allows us to wait until the function completes and midiFiles array is filled before calling it.
+Not using this approach or calling the function directly will make it run asynchronously which is
+likely going to cause a null point exception due to calling a null array.
+
+
+void getDataFromMidi()
+- Adjusted the function to work with both files and web by creating conditional statements
+if the boolean "readFromWeb" is called then we want to load the respective midi file according to
+the current level of the game
+
+void startGame
+- Adjust function to work in conjuction with startGameCouroutine() which calls the loadstreamingAsset()
+- transfered most of the code to the new function startGameCouroutine() to make it more cleaner and working
+
+IENumerator StartGameCoroutine()
+- New function created to call the loadStreamingAsset. This function works by ensuring that the 
+functions returns before moving forwards. This only happen if it's running in the web, if not then 
+the program will read from file which does not require any waiting.
+- All the other variables and functions call outs remained the same as they were inside startGame()
+
+void checkSong()
+- Adjust how the program checks the completion of a song:
+-> conditional !theSong.isPlaying -> Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length)
+Reasoning: The previous condition can cause errors as the user can unintentionall "pause" the song
+which would call the function when it is not intended to. The new change will check if the
+current time of the song is greater or equal to the total time of the song. Math.Round
+is used due to precise checking preventing the condition to become true.
+
+public static void Hit() and Miss()
+- Functions created to create a variable that increments every time a user has a streak.
+This function is called inside lanes.cs
+- This 2 functions were not created in lanes.cs because they apply to each lane separately instead of altogether;
+in other words, each lane will have its own "PointStreak" value rather than shared.
+
