@@ -1,0 +1,4 @@
+Added Score.cs 
+Added ScoreManager in the gameobjects hierarchy
+Created score UI and multiplier UI
+Added "Score.Instance.UpdateUI();" and "Score.Instance.AddScore(100);" to manager.cs
