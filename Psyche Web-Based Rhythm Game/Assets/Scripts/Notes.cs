@@ -21,6 +21,8 @@ public class Notes: MonoBehaviour
         else{
             transform.localPosition = Vector3.Lerp(Vector3.up * Manager.Instance.spawnYCoordinate,Vector3.up * Manager.Instance.despawnYCoordinate, timeFactor);
             GetComponent<SpriteRenderer>().enabled = true;
+           
+            
         }
     }
 }

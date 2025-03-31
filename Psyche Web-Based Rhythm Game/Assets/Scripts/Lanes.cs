@@ -12,7 +12,6 @@ public class Lanes : MonoBehaviour
     public List<double> timeStamps = new List<double>();
     int spawnCount = 0;
     int inputIndex = 0;
-    int pointStreak = 0;
 
     void Start()
     {
