@@ -1,6 +1,7 @@
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Manager : MonoBehaviour
 {
@@ -112,12 +113,14 @@ public class Manager : MonoBehaviour
     {
         pointStreak++;
         Debug.Log($"You hit!! Streak: {pointStreak}");
+        Score.Instance.AddScore(100);
     }
 
     public static void Miss()
     {
         pointStreak = 0;
         Debug.Log($"You missed! Streak reset.");
+        Score.Instance.UpdateUI();
     }
     void Update() {
 
