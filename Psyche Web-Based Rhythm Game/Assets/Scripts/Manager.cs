@@ -7,6 +7,7 @@ using System.IO;
 using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class Manager : MonoBehaviour
 {
@@ -26,7 +27,6 @@ public class Manager : MonoBehaviour
     public  AudioClip[] clip;
     public Image healthBar;
 
-
     public float satelliteFuel = 100f;
     public MidiFile[] loadedMidis;
 
@@ -40,6 +40,9 @@ public class Manager : MonoBehaviour
     }
 
     public static MidiFile midiFile;
+     public RawImage rawImageUI;              // The RawImage in the Canvas
+    public RenderTexture renderTexture;   // Level1, Level2, Level3
+    public VideoPlayer videoPlayer;       // Video1, Video2, Video3
     void Start() 
     {
       //  noteTime = 1;
@@ -57,6 +60,11 @@ public class Manager : MonoBehaviour
         {
             ReadFromFile();
         }
+    }
+     void StartVideoDisplay()
+    {
+        rawImageUI.texture = renderTexture;
+        videoPlayer.Play(); 
     }
 
     public void useFuel()
@@ -182,6 +190,7 @@ public class Manager : MonoBehaviour
         getDataFromMidi(); 
         theSong.clip = clip[level];
         startPlaying = true;
+        videoPlayer.Play();
         functionCalled = true;
         level++;
     }
@@ -192,6 +201,7 @@ public class Manager : MonoBehaviour
         {
         if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
         {
+            videoPlayer.Pause();
             if(functionCalled)
             {
                 nextLevel();
@@ -225,7 +235,11 @@ public class Manager : MonoBehaviour
     void Update() {
 
             if(Input.GetKeyDown(KeyCode.Return))
-            {            
+            {  
+                if(level == 0)
+                {
+                    StartVideoDisplay();
+                }         
                 startGame(functionCalled);             
             }
             if(level > 0 && level < 3 && satelliteFuel != 0)

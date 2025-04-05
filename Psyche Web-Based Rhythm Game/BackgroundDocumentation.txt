@@ -1,0 +1,17 @@
+4/5/2025
+
+UI Changes:
+- Changed sorting layer of the fuel order prefab 0 -> 1
+- Added "Background" Canvas
+- Added "VideoScreen" Raw Image inside of Background Canvas UI
+- Added "VideoPlayer" GameObject
+
+Manager.cs Script changes:
+- Added 3 new variables to control UI:
+1) public RawImage rawImageUI
+2) public RenderTexture renderTexture
+3) public VideoPlayer videoPlayer;
+
+- Added new function called "StartVideoDisplay()"
+1) In this function the video starts playing and assigns the correct texture/video VideoScreen
+
