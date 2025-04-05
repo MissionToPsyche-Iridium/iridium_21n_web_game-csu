@@ -15,3 +15,6 @@ Manager.cs Script changes:
 - Added new function called "StartVideoDisplay()"
 1) In this function the video starts playing and assigns the correct texture/video VideoScreen
 
+-Video quality(Background):
+
+Due to limitation of Github only allowing 100KB, I needed to reduce the video quality. 
