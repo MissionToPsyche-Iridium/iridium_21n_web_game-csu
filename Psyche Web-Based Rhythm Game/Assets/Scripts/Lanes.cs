@@ -41,7 +41,7 @@ public class Lanes : MonoBehaviour
 
     public void setTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
-        foreach(var note in array)
+        foreach (var note in array)
         {
             if (note.NoteName == notePicked)
             {
@@ -54,38 +54,40 @@ public class Lanes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isPaused)
+            return; // Stop everything when paused
+
         if (spawnCount < timeStamps.Count)
         {
-            if(Manager.getAudioSourceTime () >= timeStamps[spawnCount] - 1) //replaced noteTime with 1. Greater than 1 messes with the spawn of the note. If changed and everything else the same, this will cause the notes to come down a lot faster
+            if (Manager.getAudioSourceTime() >= timeStamps[spawnCount] - 1)
             {
                 var note = Instantiate(notePrefab, transform);
                 notes.Add(note.GetComponent<Notes>());
-                note.GetComponent<Notes>().assignedTime = (float)timeStamps[spawnCount];  
+                note.GetComponent<Notes>().assignedTime = (float)timeStamps[spawnCount];
                 spawnCount++;
             }
         }
 
-        if(inputIndex < timeStamps.Count)
+        if (inputIndex < timeStamps.Count)
         {
             double timeStamp = timeStamps[inputIndex];
             double marginOfError = Manager.Instance.marginOfError;
             double audioTime = Manager.getAudioSourceTime();
 
-            if(Input.GetKeyDown(input))
+            if (Input.GetKeyDown(input))
             {
-                if(Math.Abs(audioTime - timeStamp) < marginOfError)
+                if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
-                        Manager.Hit();
-                        Destroy(notes[inputIndex].gameObject);
-                        inputIndex++;
+                    Manager.Hit();
+                    Destroy(notes[inputIndex].gameObject);
+                    inputIndex++;
                 }
             }
-            if(timeStamp + marginOfError <= audioTime)
+            if (timeStamp + marginOfError <= audioTime)
             {
                 Manager.Miss();
                 inputIndex++;
             }
-
         }
     }
 }

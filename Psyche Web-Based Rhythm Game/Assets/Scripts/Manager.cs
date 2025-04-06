@@ -223,6 +223,7 @@ public class Manager : MonoBehaviour
         pointStreak = 0;
         Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {Instance.functionCalled} ");
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
