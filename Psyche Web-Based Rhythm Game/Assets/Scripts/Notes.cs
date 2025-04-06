@@ -4,9 +4,18 @@ public class Notes: MonoBehaviour
 {
     double timeInstantiated;
     public float assignedTime;
+    private bool isPaused = false;
     void Start()
     {
         timeInstantiated = Manager.getAudioSourceTime();
+    }
+    public void PauseNote()
+    {
+        isPaused = true;
+    }
+    public void ResumeNote()
+    {
+        isPaused = false;
     }
 
     void Update()

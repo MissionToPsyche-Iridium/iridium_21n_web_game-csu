@@ -12,10 +12,31 @@ public class Lanes : MonoBehaviour
     public List<double> timeStamps = new List<double>();
     int spawnCount = 0;
     int inputIndex = 0;
+    public static Lanes Instance;
+    public bool isPaused = false;
 
     void Start()
     {
-        
+        Instance = this;
+    }
+    public void PauseGame()
+    {
+        isPaused = true;
+
+        foreach (Notes note in notes)
+        {
+            note.PauseNote();
+        }
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+
+        foreach (Notes note in notes)
+        {
+            note.ResumeNote();
+        }
     }
 
     public void setTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
