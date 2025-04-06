@@ -54,10 +54,15 @@ public class Manager : MonoBehaviour
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
             StartCoroutine(loadStreamingAsset());
+            string path = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            videoPlayer.source = VideoSource.Url;
+            videoPlayer.url = path;
+            videoPlayer.Prepare();
             readFromWeb = true;
         }
         else
         {
+            videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
             ReadFromFile();
         }
     }
@@ -232,15 +237,20 @@ public class Manager : MonoBehaviour
         pointStreak = 0;
         Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {Instance.functionCalled} ");
     }
+
+    public void delayStart()
+    {
+         if(level == 0)
+                {
+                    StartVideoDisplay();
+                } 
+        startGame(functionCalled);
+    }
     void Update() {
 
             if(Input.GetKeyDown(KeyCode.Return))
-            {  
-                if(level == 0)
-                {
-                    StartVideoDisplay();
-                }         
-                startGame(functionCalled);             
+            {          
+                Invoke(nameof(delayStart),0.5f);           
             }
             if(level > 0 && level < 3 && satelliteFuel != 0)
             {
