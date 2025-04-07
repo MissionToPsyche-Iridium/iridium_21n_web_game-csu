@@ -7,6 +7,7 @@ using System.IO;
 using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class Manager : MonoBehaviour
 {
@@ -26,7 +27,6 @@ public class Manager : MonoBehaviour
     public AudioClip[] clip;
     public Image healthBar;
 
-
     public float satelliteFuel = 100f;
     public MidiFile[] loadedMidis;
 
@@ -41,7 +41,10 @@ public class Manager : MonoBehaviour
     }
 
     public static MidiFile midiFile;
-    void Start()
+     public RawImage rawImageUI;              // The RawImage in the Canvas
+    public RenderTexture renderTexture;   // Level1, Level2, Level3
+    public VideoPlayer videoPlayer;       // Video1, Video2, Video3
+    void Start() 
     {
         //  noteTime = 1;
         tapYCoordinate = -271;
@@ -52,12 +55,22 @@ public class Manager : MonoBehaviour
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
             StartCoroutine(loadStreamingAsset());
+            string path = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            videoPlayer.source = VideoSource.Url;
+            videoPlayer.url = path;
+            videoPlayer.Prepare();
             readFromWeb = true;
         }
         else
         {
+            videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
             ReadFromFile();
         }
+    }
+     void StartVideoDisplay()
+    {
+        rawImageUI.texture = renderTexture;
+        videoPlayer.Play(); 
     }
 
     public void useFuel()
@@ -183,6 +196,7 @@ public class Manager : MonoBehaviour
         getDataFromMidi();
         theSong.clip = clip[level];
         startPlaying = true;
+        videoPlayer.Play();
         functionCalled = true;
         level++;
     }
@@ -191,13 +205,14 @@ public class Manager : MonoBehaviour
     {
         if (level < 3)
         {
-            if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
+        if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
+        {
+            videoPlayer.Pause();
+            if(functionCalled)
             {
-                if (functionCalled)
-                {
-                    nextLevel();
-                }
-            }
+                nextLevel();
+            }  
+        }
         }
     }
 
@@ -223,6 +238,16 @@ public class Manager : MonoBehaviour
         pointStreak = 0;
         Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {Instance.functionCalled} ");
     }
+
+    public void delayStart()
+    {
+         if(level == 0)
+                {
+                    StartVideoDisplay();
+                } 
+        startGame(functionCalled);
+    }
+    void Update() {
 
     void Update()
     {
