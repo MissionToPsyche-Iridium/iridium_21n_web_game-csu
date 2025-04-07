@@ -41,10 +41,10 @@ public class Manager : MonoBehaviour
     }
 
     public static MidiFile midiFile;
-     public RawImage rawImageUI;              // The RawImage in the Canvas
+    public RawImage rawImageUI;              // The RawImage in the Canvas
     public RenderTexture renderTexture;   // Level1, Level2, Level3
     public VideoPlayer videoPlayer;       // Video1, Video2, Video3
-    void Start() 
+    void Start()
     {
         //  noteTime = 1;
         tapYCoordinate = -271;
@@ -67,10 +67,10 @@ public class Manager : MonoBehaviour
             ReadFromFile();
         }
     }
-     void StartVideoDisplay()
+    void StartVideoDisplay()
     {
         rawImageUI.texture = renderTexture;
-        videoPlayer.Play(); 
+        videoPlayer.Play();
     }
 
     public void useFuel()
@@ -205,14 +205,14 @@ public class Manager : MonoBehaviour
     {
         if (level < 3)
         {
-        if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
-        {
-            videoPlayer.Pause();
-            if(functionCalled)
+            if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
             {
-                nextLevel();
-            }  
-        }
+                videoPlayer.Pause();
+                if (functionCalled)
+                {
+                    nextLevel();
+                }
+            }
         }
     }
 
@@ -241,46 +241,46 @@ public class Manager : MonoBehaviour
 
     public void delayStart()
     {
-         if(level == 0)
-                {
-                    StartVideoDisplay();
-                } 
+        if (level == 0)
+        {
+            StartVideoDisplay();
+        }
         startGame(functionCalled);
     }
-    void Update() {
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            startGame(functionCalled);
-        }
-        if (level > 0 && level < 3 && satelliteFuel != 0)
-        {
-            Invoke(nameof(checkSong), 0.01f);
-        }
-        if (satelliteFuel == 0)
-        {
-            Debug.Log("Game Over!!");
-            //change to menu/scene
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level < 3 )
-        {
-            if (!Lanes.Instance.isPaused)
-            {
-                // PauseMenu.GameIsPaused = true;
-                Lanes.Instance.PauseGame();
-                theSong.Pause();
+            if (Input.GetKeyDown(KeyCode.Return))
+            {               
+                    Invoke(nameof(delayStart), 0.5f);               
             }
-            else if (Lanes.Instance.isPaused)
+            if (level > 0 && level < 3 && satelliteFuel != 0)
             {
-                // PauseMenu.GameIsPaused = false;
-                Lanes.Instance.ResumeGame();
-                theSong.Play();
+                Invoke(nameof(checkSong), 0.01f);
+            }
+            if (satelliteFuel == 0)
+            {
+                Debug.Log("Game Over!!");
+                //change to menu/scene
             }
 
+            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level < 3)
+            {
+                if (!Lanes.Instance.isPaused)
+                {
+                    // PauseMenu.GameIsPaused = true;
+                    Lanes.Instance.PauseGame();
+                    theSong.Pause();
+                    videoPlayer.Pause();
+                }
+                else if (Lanes.Instance.isPaused)
+                {
+                    // PauseMenu.GameIsPaused = false;
+                    Lanes.Instance.ResumeGame();
+                    theSong.Play();
+                    videoPlayer.Play();
+                }
+
+            }
         }
-    }
 }
 

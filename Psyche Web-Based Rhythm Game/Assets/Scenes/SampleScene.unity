@@ -862,7 +862,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 812497521}
-  - {fileID: 1441011907}
   m_Father: {fileID: 939522310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1140,7 +1139,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &939522310
 RectTransform:
@@ -1452,7 +1451,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-
 --- !u!222 &1269710733
 CanvasRenderer:
   m_ObjectHideFlags: 0
