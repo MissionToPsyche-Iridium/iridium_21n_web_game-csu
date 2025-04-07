@@ -22,7 +22,7 @@ public class Manager : MonoBehaviour
     public bool startPlaying;
     public bool functionCalled;
     public bool readFromWeb;
-    private static int level = 0;
+    public static int level = 0;
     private static int midiLevel = 0;
     public AudioClip[] clip;
     public Image healthBar;
@@ -51,10 +51,10 @@ public class Manager : MonoBehaviour
         spawnYCoordinate = 400;
         marginOfError = 0.25;
         Instance = this;
-        print($"Press Return/Enter to start the Game!");
+      //  print($"Press Return/Enter to start the Game!");
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
-            StartCoroutine(loadStreamingAsset());
+             StartCoroutine(loadStreamingAsset());
             string path = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
             videoPlayer.source = VideoSource.Url;
             videoPlayer.url = path;
@@ -210,15 +210,17 @@ public class Manager : MonoBehaviour
                 videoPlayer.Pause();
                 if (functionCalled)
                 {
-                    nextLevel();
+                    NextScene.Instance.nextScene();
+                    //nextLevel();
                 }
             }
         }
     }
-
-    private void nextLevel()
+// checksong -> nextlevel -> waits for user input.
+    public void nextLevel()
     {
         functionCalled = false;
+        
         print($"Press Return/Enter to proceed to level {level + 1}!");
         if (Input.GetKeyDown(KeyCode.Return))
         {
@@ -248,11 +250,17 @@ public class Manager : MonoBehaviour
         startGame(functionCalled);
     }
     void Update()
-    {
+    {               
+        if(level == 0)
+        {
+            print($"Press Return/Enter to proceed to level {level + 1}!");
             if (Input.GetKeyDown(KeyCode.Return))
-            {               
-                    Invoke(nameof(delayStart), 0.5f);               
+            {
+                Invoke(nameof(delayStart), 0.01f);   
             }
+        }  
+                        
+            
             if (level > 0 && level < 3 && satelliteFuel != 0)
             {
                 Invoke(nameof(checkSong), 0.01f);

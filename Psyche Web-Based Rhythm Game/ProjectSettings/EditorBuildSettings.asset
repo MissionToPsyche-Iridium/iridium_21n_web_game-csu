@@ -9,8 +9,23 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 69100dd4637e1d54e894545ca5695e0d
   - enabled: 1
+    path: Assets/Scenes/Intro Scene.unity
+    guid: 153c28e241e16b64db74e422dd14241d
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Scene Lvl1.unity
+    guid: 80489707b0af196438fc66ea92c2fbef
+  - enabled: 1
+    path: Assets/Scenes/Scene Lvl2.unity
+    guid: bea83928e274ce34bacbfdd0979e4044
+  - enabled: 1
+    path: Assets/Scenes/Scene Lvl3.unity
+    guid: 8f3b9cff11a34af45b82166100ddc463
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: b1df10ce309b7d74983633eb9b1fb757
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
