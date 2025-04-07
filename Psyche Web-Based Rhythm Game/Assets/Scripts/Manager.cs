@@ -7,6 +7,7 @@ using System.IO;
 using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class Manager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Manager : MonoBehaviour
     public Lanes[] lanes;
     public AudioSource theSong;
     public double marginOfError;
-    private string[] midiName = {"day50.mid", "day69.mid", "day15.mid"};
+    private string[] midiName = { "day50.mid", "day69.mid", "day15.mid" };
     //public float noteTime;
     public float spawnYCoordinate;
     public float tapYCoordinate;
@@ -22,27 +23,30 @@ public class Manager : MonoBehaviour
     public bool functionCalled;
     public bool readFromWeb;
     private static int level = 0;
-    private static int midiLevel =0;
-    public  AudioClip[] clip;
+    private static int midiLevel = 0;
+    public AudioClip[] clip;
     public Image healthBar;
-
 
     public float satelliteFuel = 100f;
     public MidiFile[] loadedMidis;
 
     public static int pointStreak = 0;
 
-      public float despawnYCoordinate
+    public float despawnYCoordinate
     {
-        get{
+        get
+        {
             return tapYCoordinate - (spawnYCoordinate - tapYCoordinate);
         }
     }
 
     public static MidiFile midiFile;
-    void Start() 
+    public RawImage rawImageUI;              // The RawImage in the Canvas
+    public RenderTexture renderTexture;   // Level1, Level2, Level3
+    public VideoPlayer videoPlayer;       // Video1, Video2, Video3
+    void Start()
     {
-      //  noteTime = 1;
+        //  noteTime = 1;
         tapYCoordinate = -271;
         spawnYCoordinate = 400;
         marginOfError = 0.25;
@@ -51,20 +55,30 @@ public class Manager : MonoBehaviour
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
             StartCoroutine(loadStreamingAsset());
+            string path = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            videoPlayer.source = VideoSource.Url;
+            videoPlayer.url = path;
+            videoPlayer.Prepare();
             readFromWeb = true;
         }
         else
         {
+            videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
             ReadFromFile();
         }
+    }
+    void StartVideoDisplay()
+    {
+        rawImageUI.texture = renderTexture;
+        videoPlayer.Play();
     }
 
     public void useFuel()
     {
-        if(satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
+        if (satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
         {
             satelliteFuel--;
-            if(satelliteFuel < 0)
+            if (satelliteFuel < 0)
             {
                 satelliteFuel = 0;
             }
@@ -74,10 +88,10 @@ public class Manager : MonoBehaviour
 
     public void gainFuel()
     {
-        if(satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
+        if (satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
         {
             satelliteFuel += 2;
-            if(satelliteFuel > 100)
+            if (satelliteFuel > 100)
             {
                 satelliteFuel = 100;
             }
@@ -85,65 +99,65 @@ public class Manager : MonoBehaviour
         }
     }
 
-   private IEnumerator loadStreamingAsset()
-{
-    string fullPath1 = Application.streamingAssetsPath + "/" + midiName[0];
-    string fullPath2 = Application.streamingAssetsPath + "/" + midiName[1];
-    string fullPath3 = Application.streamingAssetsPath + "/" + midiName[2];
-    string[] paths = { fullPath1, fullPath2, fullPath3 };
-    int i = 0;
-    foreach(string path in paths)
+    private IEnumerator loadStreamingAsset()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get(path))
+        string fullPath1 = Application.streamingAssetsPath + "/" + midiName[0];
+        string fullPath2 = Application.streamingAssetsPath + "/" + midiName[1];
+        string fullPath3 = Application.streamingAssetsPath + "/" + midiName[2];
+        string[] paths = { fullPath1, fullPath2, fullPath3 };
+        int i = 0;
+        foreach (string path in paths)
         {
-            yield return www.SendWebRequest();
+            using (UnityWebRequest www = UnityWebRequest.Get(path))
+            {
+                yield return www.SendWebRequest();
 
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Error loading MIDI: " + www.error);
-            }
-        else
-            {
-                byte[] results = www.downloadHandler.data;
-                using (MemoryStream stream = new MemoryStream(results))
+                if (www.result != UnityWebRequest.Result.Success)
                 {
-                    loadedMidis[i] = MidiFile.Read(stream); 
+                    Debug.LogError("Error loading MIDI: " + www.error);
+                }
+                else
+                {
+                    byte[] results = www.downloadHandler.data;
+                    using (MemoryStream stream = new MemoryStream(results))
+                    {
+                        loadedMidis[i] = MidiFile.Read(stream);
+                    }
                 }
             }
+            i++;
         }
-        i++;
     }
-}
     private void ReadFromFile()
     {
-        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiName[midiLevel]);                  
+        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiName[midiLevel]);
     }
 
     public void getDataFromMidi()
-    { 
-        if(readFromWeb && level == 0)
+    {
+        if (readFromWeb && level == 0)
         {
             midiFile = loadedMidis[0];
         }
-        else if(readFromWeb && level == 1)
+        else if (readFromWeb && level == 1)
         {
             midiFile = loadedMidis[1];
         }
-         else if(readFromWeb && level == 2)
+        else if (readFromWeb && level == 2)
         {
             midiFile = loadedMidis[2];
         }
         var notes = midiFile.GetNotes();
         var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
-        notes.CopyTo(array,0);
+        notes.CopyTo(array, 0);
 
-        foreach(var lane in lanes)
+        foreach (var lane in lanes)
         {
             lane.setTimeStamps(array);
         }
 
         Invoke(nameof(StartSong), 0);
-        
+
     }
 
     public static double getAudioSourceTime()
@@ -153,58 +167,60 @@ public class Manager : MonoBehaviour
 
     public void StartSong()
     {
-        theSong.Play();     
+        theSong.Play();
     }
 
     public void startGame(bool functionCall)
     {
-         
-         if(!functionCall)
-                {
-                    if(level != 0) 
-                    {
-                        midiLevel++;
-                    }           
-                       StartCoroutine(StartGameCoroutine());            
-                }            
+
+        if (!functionCall)
+        {
+            if (level != 0)
+            {
+                midiLevel++;
+            }
+            StartCoroutine(StartGameCoroutine());
+        }
     }
 
     private IEnumerator StartGameCoroutine()
     {
         if (readFromWeb)
         {
-            yield return StartCoroutine(loadStreamingAsset()); 
+            yield return StartCoroutine(loadStreamingAsset());
         }
         else
         {
             ReadFromFile();
         }
-        getDataFromMidi(); 
+        getDataFromMidi();
         theSong.clip = clip[level];
         startPlaying = true;
+        videoPlayer.Play();
         functionCalled = true;
         level++;
     }
 
     private void checkSong()
     {
-        if(level < 3)
+        if (level < 3)
         {
-        if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
-        {
-            if(functionCalled)
+            if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
             {
-                nextLevel();
-            }  
-        }
+                videoPlayer.Pause();
+                if (functionCalled)
+                {
+                    nextLevel();
+                }
+            }
         }
     }
 
     private void nextLevel()
     {
         functionCalled = false;
-        print($"Press Return/Enter to proceed to level {level+1}!");
-        if(Input.GetKeyDown(KeyCode.Return))
+        print($"Press Return/Enter to proceed to level {level + 1}!");
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             startGame(functionCalled);
         }
@@ -222,21 +238,49 @@ public class Manager : MonoBehaviour
         pointStreak = 0;
         Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {Instance.functionCalled} ");
     }
-    void Update() {
 
-            if(Input.GetKeyDown(KeyCode.Return))
-            {            
-                startGame(functionCalled);             
+    public void delayStart()
+    {
+        if (level == 0)
+        {
+            StartVideoDisplay();
+        }
+        startGame(functionCalled);
+    }
+    void Update()
+    {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {               
+                    Invoke(nameof(delayStart), 0.5f);               
             }
-            if(level > 0 && level < 3 && satelliteFuel != 0)
+            if (level > 0 && level < 3 && satelliteFuel != 0)
             {
                 Invoke(nameof(checkSong), 0.01f);
             }
-            if(satelliteFuel == 0)
+            if (satelliteFuel == 0)
             {
                 Debug.Log("Game Over!!");
                 //change to menu/scene
             }
-    }
+
+            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level < 3)
+            {
+                if (!Lanes.Instance.isPaused)
+                {
+                    // PauseMenu.GameIsPaused = true;
+                    Lanes.Instance.PauseGame();
+                    theSong.Pause();
+                    videoPlayer.Pause();
+                }
+                else if (Lanes.Instance.isPaused)
+                {
+                    // PauseMenu.GameIsPaused = false;
+                    Lanes.Instance.ResumeGame();
+                    theSong.Play();
+                    videoPlayer.Play();
+                }
+
+            }
+        }
 }
 

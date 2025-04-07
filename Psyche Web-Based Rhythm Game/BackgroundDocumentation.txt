@@ -1,0 +1,34 @@
+4/5/2025
+
+UI Changes:
+- Changed sorting layer of the fuel order prefab 0 -> 1
+- Added "Background" Canvas
+- Added "VideoScreen" Raw Image inside of Background Canvas UI
+- Added "VideoPlayer" GameObject
+
+Manager.cs Script changes:
+- Added 3 new variables to control UI:
+1) public RawImage rawImageUI (Changed Rect Transform to strecth both horizontally and vertically to ensure it is fitting the screen size)
+2) public RenderTexture renderTexture
+3) public VideoPlayer videoPlayer;
+
+- Added new function called "StartVideoDisplay()"
+1) In this function the video starts playing and assigns the correct texture/video VideoScreen
+
+-Video quality(Background):
+
+Due to limitation of Github only allowing 100KB, I needed to reduce the video quality. 
+
+- Added the following to void Start():
+string path = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            videoPlayer.source = VideoSource.Url;
+            videoPlayer.url = path;
+            videoPlayer.Prepare();
+
+The code of lines above make sure that the video is uploaded to the web and is playing the correct uploaded version in webGL
+Added:
+videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+Instead of dragging and dropping asset, changed to programically select the correct mp4 video file.
+
+Added a new function called "delayStart()"
+- As the name implies, this function delays the start of the game by .5seconds to ensure everything loads before the game starts.
