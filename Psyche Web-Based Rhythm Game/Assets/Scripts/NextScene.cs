@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
-  private int sceneCount = 0;
+    public static bool backToGame =false;
+    public static double savedTime = 0;
     public static NextScene Instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,8 +33,10 @@ public class NextScene : MonoBehaviour
     {
         if(Manager.level < 3)
         {
+            backToGame = true;
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game");  
-            Invoke(nameof(Manager.Instance.nextLevel), 0.3f);
+
+           // Invoke(nameof(Manager.Instance.nextLevel), 0.01f);
         }
         else if (Manager.level == 3)
         {

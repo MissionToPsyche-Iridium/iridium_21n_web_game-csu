@@ -19,16 +19,15 @@ public class Manager : MonoBehaviour
     //public float noteTime;
     public float spawnYCoordinate;
     public float tapYCoordinate;
-    public bool startPlaying;
-    public bool functionCalled;
+    public static bool gameRunning;
     public bool readFromWeb;
     public static int level = 0;
-    private static int midiLevel = 0;
+    public static int midiLevel = 0;
     public AudioClip[] clip;
     public Image healthBar;
 
     public float satelliteFuel = 100f;
-    public MidiFile[] loadedMidis;
+    public static MidiFile[] loadedMidis;
 
     public static int pointStreak = 0;
 
@@ -41,9 +40,10 @@ public class Manager : MonoBehaviour
     }
 
     public static MidiFile midiFile;
-    public RawImage rawImageUI;              // The RawImage in the Canvas
-    public RenderTexture renderTexture;   // Level1, Level2, Level3
-    public VideoPlayer videoPlayer;       // Video1, Video2, Video3
+    public RawImage rawImageUI;       
+    public RenderTexture renderTexture;   
+    public VideoPlayer videoPlayer;      
+    
     void Start()
     {
         //  noteTime = 1;
@@ -51,20 +51,15 @@ public class Manager : MonoBehaviour
         spawnYCoordinate = 400;
         marginOfError = 0.25;
         Instance = this;
-      //  print($"Press Return/Enter to start the Game!");
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
              StartCoroutine(loadStreamingAsset());
-            string path = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
-            videoPlayer.source = VideoSource.Url;
-            videoPlayer.url = path;
-            videoPlayer.Prepare();
             readFromWeb = true;
         }
         else
         {
             videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
-            ReadFromFile();
+            StartCoroutine(ReadFromFile());
         }
     }
     void StartVideoDisplay()
@@ -75,7 +70,7 @@ public class Manager : MonoBehaviour
 
     public void useFuel()
     {
-        if (satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
+        if (satelliteFuel <= 100 && satelliteFuel >= 1 && gameRunning)
         {
             satelliteFuel--;
             if (satelliteFuel < 0)
@@ -88,7 +83,7 @@ public class Manager : MonoBehaviour
 
     public void gainFuel()
     {
-        if (satelliteFuel <= 100 && satelliteFuel >= 1 && startPlaying)
+        if (satelliteFuel <= 100 && satelliteFuel >= 1 && gameRunning)
         {
             satelliteFuel += 2;
             if (satelliteFuel > 100)
@@ -101,6 +96,10 @@ public class Manager : MonoBehaviour
 
     private IEnumerator loadStreamingAsset()
     {
+        string pathVid = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+        videoPlayer.source = VideoSource.Url;
+        videoPlayer.url = pathVid;
+        videoPlayer.Prepare();
         string fullPath1 = Application.streamingAssetsPath + "/" + midiName[0];
         string fullPath2 = Application.streamingAssetsPath + "/" + midiName[1];
         string fullPath3 = Application.streamingAssetsPath + "/" + midiName[2];
@@ -128,25 +127,26 @@ public class Manager : MonoBehaviour
             i++;
         }
     }
-    private void ReadFromFile()
+    private IEnumerator ReadFromFile()
     {
-        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiName[midiLevel]);
+         midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiName[midiLevel]);
+         yield return null;
     }
 
-    public void getDataFromMidi()
+    public IEnumerator getDataFromMidi()
     {
-        if (readFromWeb && level == 0)
+        if (readFromWeb)
         {
-            midiFile = loadedMidis[0];
+            midiFile = loadedMidis[level];
         }
-        else if (readFromWeb && level == 1)
+      /*  else if (readFromWeb && level == 1)
         {
             midiFile = loadedMidis[1];
         }
         else if (readFromWeb && level == 2)
         {
             midiFile = loadedMidis[2];
-        }
+        }*/
         var notes = midiFile.GetNotes();
         var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
         notes.CopyTo(array, 0);
@@ -155,9 +155,7 @@ public class Manager : MonoBehaviour
         {
             lane.setTimeStamps(array);
         }
-
-        Invoke(nameof(StartSong), 0);
-
+        yield return null;
     }
 
     public static double getAudioSourceTime()
@@ -165,16 +163,12 @@ public class Manager : MonoBehaviour
         return (double)Instance.theSong.timeSamples / Instance.theSong.clip.frequency;
     }
 
-    public void StartSong()
+    public void startGame(bool isGameRunning)
     {
-        theSong.Play();
-    }
-
-    public void startGame(bool functionCall)
-    {
-
-        if (!functionCall)
+        print($"start Game went");
+        if (!isGameRunning)
         {
+            print($"bool in start game went");
             if (level != 0)
             {
                 midiLevel++;
@@ -191,103 +185,87 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            ReadFromFile();
+           yield return StartCoroutine(ReadFromFile());
         }
-        getDataFromMidi();
+
+    yield return StartCoroutine(getDataFromMidi());
+    videoPlayer.Prepare();
+
+    while (!videoPlayer.isPrepared)
+    {
+        yield return null;
+    }         
+        videoPlayer.time = NextScene.savedTime; 
+        videoPlayer.Play(); 
         theSong.clip = clip[level];
-        startPlaying = true;
-        videoPlayer.Play();
-        functionCalled = true;
+        //theSong.pitch = 10f;
+        theSong.Play();     
+        gameRunning = true;
         level++;
     }
-
-    private void checkSong()
-    {
-        if (level < 3)
-        {
-            if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
-            {
-                videoPlayer.Pause();
-                if (functionCalled)
-                {
-                    NextScene.Instance.nextScene();
-                    //nextLevel();
-                }
-            }
-        }
-    }
-// checksong -> nextlevel -> waits for user input.
-    public void nextLevel()
-    {
-        functionCalled = false;
-        
-        print($"Press Return/Enter to proceed to level {level + 1}!");
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            startGame(functionCalled);
-        }
-    }
-
     public static void Hit()
     {
         pointStreak++;
         Instance.gainFuel();
-        Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
+     //   Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
     }
 
     public static void Miss()
     {
         pointStreak = 0;
-        Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {Instance.functionCalled} ");
+      //  Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {gameRunning} vid time: { Instance.videoPlayer.time} ");
     }
 
     public void delayStart()
     {
-        if (level == 0)
-        {
-            StartVideoDisplay();
-        }
-        startGame(functionCalled);
+        StartVideoDisplay();
+        startGame(gameRunning);
     }
     void Update()
     {               
-        if(level == 0)
+        if(NextScene.backToGame)
         {
-            print($"Press Return/Enter to proceed to level {level + 1}!");
-            if (Input.GetKeyDown(KeyCode.Return))
+            gameRunning = false;
+            NextScene.backToGame = false;
+            if(level == 0)
             {
-                Invoke(nameof(delayStart), 0.01f);   
+                delayStart();
             }
-        }  
-                        
+            else if (level > 0) {
+                startGame(gameRunning);
+            }
             
-            if (level > 0 && level < 3 && satelliteFuel != 0)
-            {
-                Invoke(nameof(checkSong), 0.01f);
+        }       
+        if (level > 0 && level < 3 && satelliteFuel != 0 && gameRunning )
+        {
+            if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
+                {
+                    videoPlayer.Pause();
+                    NextScene.savedTime = videoPlayer.time;
+                    if (gameRunning)
+                    {
+                        NextScene.Instance.nextScene();
+                    }
+                }
             }
             if (satelliteFuel == 0)
             {
                 Debug.Log("Game Over!!");
-                //change to menu/scene
             }
-
             if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level < 3)
             {
                 if (!Lanes.Instance.isPaused)
                 {
-                    // PauseMenu.GameIsPaused = true;
                     Lanes.Instance.PauseGame();
                     theSong.Pause();
                     videoPlayer.Pause();
                 }
                 else if (Lanes.Instance.isPaused)
                 {
-                    // PauseMenu.GameIsPaused = false;
                     Lanes.Instance.ResumeGame();
                     theSong.Play();
                     videoPlayer.Play();
                 }
-
             }
         }
 }
