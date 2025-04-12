@@ -26,6 +26,15 @@ public class Manager : MonoBehaviour
     public AudioClip[] clip;
     public Image healthBar;
 
+    public int finalScore;
+    public int scorePerHit = 100;
+    public Text scoreText;
+    public Text multiplierText;
+    public int finalMultiplier;
+    public int multiplierTracker;
+    public int[] multiplierThresh;
+
+
     public float satelliteFuel = 100f;
     public static MidiFile[] loadedMidis;
 
@@ -51,6 +60,12 @@ public class Manager : MonoBehaviour
         spawnYCoordinate = 400;
         marginOfError = 0.25;
         Instance = this;
+
+        scoreText.text = "Score: 0";
+        multiplierText.text = "Multiplier: x1";
+        finalMultiplier = 1;
+        multiplierThresh = new int[] { 2, 4, 6 };
+
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
              StartCoroutine(loadStreamingAsset());
@@ -207,13 +222,41 @@ public class Manager : MonoBehaviour
     {
         pointStreak++;
         Instance.gainFuel();
-     //   Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
+        //   Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
+
+        //Debug.Log("Hit on time");
+
+        if (Instance.finalMultiplier - 1 < Instance.multiplierThresh.Length)
+        {
+            Instance.multiplierTracker++;
+
+            if (Instance.multiplierThresh[Instance.finalMultiplier - 1] <= Instance.multiplierTracker)
+            {
+                Instance.multiplierTracker = 0;
+                Instance.finalMultiplier++;
+            }
+        }
+
+
+
+
+        Instance.finalScore += Instance.scorePerHit * Instance.finalMultiplier;
+        Instance.scoreText.text = "Score: " + Instance.finalScore;
+        Instance.multiplierText.text = "Multiplier: x" + Instance.finalMultiplier;
     }
+
+   
 
     public static void Miss()
     {
+        Instance.finalMultiplier = 1;
+        Instance.multiplierTracker = 0;
+        Instance.multiplierText.text = "Multiplier: x" + Instance.finalMultiplier;
+
+
         pointStreak = 0;
       //  Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {gameRunning} vid time: { Instance.videoPlayer.time} ");
+    
     }
 
     public void delayStart()

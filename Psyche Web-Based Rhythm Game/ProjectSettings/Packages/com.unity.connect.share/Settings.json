@@ -14,7 +14,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/Warren Wu/OneDrive/Documents/GitHub/iridium_21n_web_game-csu/Psyche Web-Based Rhythm Game/WebGL/Build;D:/GitHub/iridium_21n_web_game-csu/Psyche Web-Based Rhythm Game/WebGL;D:/GitHub/iridium_21n_web_game-csu/Psyche Web-Based Rhythm Game/Web;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/Dawn/Documents/GitHub/Senior Design/iridium_21n_web_game-csu/Psyche Web-Based Rhythm Game/WebGL;C:/Users/Warren Wu/OneDrive/Documents/GitHub/iridium_21n_web_game-csu/Psyche Web-Based Rhythm Game/WebGL/Build;D:/GitHub/iridium_21n_web_game-csu/Psyche Web-Based Rhythm Game/WebGL;D:/GitHub/iridium_21n_web_game-csu/Psyche Web-Based Rhythm Game/Web;;;;;;\"}"
             }
         ]
     }
