@@ -302,7 +302,7 @@ public class Manager : MonoBehaviour
                 //summon credits scene here
 
             }
-            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3)
+            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3 && videoPlayer.time < videoPlayer.length)
             {
                 if (!Lanes.Instance.isPaused)
                 {
