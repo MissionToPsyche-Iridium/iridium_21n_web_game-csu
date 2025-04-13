@@ -15,7 +15,8 @@ public class Manager : MonoBehaviour
     public Lanes[] lanes;
     public AudioSource theSong;
     public double marginOfError;
-    private string[] midiName = { "day50.mid", "day69.mid", "day15.mid" };
+    private string[] midiName = { "day50.mid", "day69.mid",  "day15.mid" };
+    private string[] midiNameNASA = {"ascension.mid", "breathless.mid", "degasparis.mid"};
     //public float noteTime;
     public float spawnYCoordinate;
     public float tapYCoordinate;
@@ -42,7 +43,10 @@ public class Manager : MonoBehaviour
     public static MidiFile midiFile;
     public RawImage rawImageUI;       
     public RenderTexture renderTexture;   
-    public VideoPlayer videoPlayer;      
+    public VideoPlayer videoPlayer;    
+    public static bool GameOver = false;  
+
+    public static bool NASACollection = false;
     
     void Start()
     {
@@ -51,6 +55,24 @@ public class Manager : MonoBehaviour
         spawnYCoordinate = 400;
         marginOfError = 0.25;
         Instance = this;
+        if(NASACollection)
+        {
+            clip = new AudioClip[]
+            {
+                Resources.Load<AudioClip>("Songs/ascension"),
+                Resources.Load<AudioClip>("Songs/breathless"),
+                Resources.Load<AudioClip>("Songs/degasparis")
+            };
+        }
+        else
+        {
+            clip = new AudioClip[]
+            {
+                Resources.Load<AudioClip>("Songs/day50"),
+                Resources.Load<AudioClip>("Songs/day69"),
+                Resources.Load<AudioClip>("Songs/day15")
+            };
+        }
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
              StartCoroutine(loadStreamingAsset());
@@ -72,7 +94,18 @@ public class Manager : MonoBehaviour
     {
         if (satelliteFuel <= 100 && satelliteFuel >= 1 && gameRunning)
         {
-            satelliteFuel--;
+            if(level == 1)
+            {
+                satelliteFuel--;
+            }
+            else if(level == 2)
+            {
+                satelliteFuel -= 2;
+            }
+            else if(level == 3)
+            {
+                satelliteFuel -=3;
+            }
             if (satelliteFuel < 0)
             {
                 satelliteFuel = 0;
@@ -96,7 +129,16 @@ public class Manager : MonoBehaviour
 
     private IEnumerator loadStreamingAsset()
     {
-        string pathVid = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+        string pathVid;
+        if(NASACollection)
+        {
+           pathVid = Application.streamingAssetsPath + "/PsycheBackgroundNASAVer.mp4";
+           midiName = midiNameNASA;
+        }
+        else
+        {
+            pathVid = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+        }
         videoPlayer.source = VideoSource.Url;
         videoPlayer.url = pathVid;
         videoPlayer.Prepare();
@@ -139,14 +181,6 @@ public class Manager : MonoBehaviour
         {
             midiFile = loadedMidis[level];
         }
-      /*  else if (readFromWeb && level == 1)
-        {
-            midiFile = loadedMidis[1];
-        }
-        else if (readFromWeb && level == 2)
-        {
-            midiFile = loadedMidis[2];
-        }*/
         var notes = midiFile.GetNotes();
         var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
         notes.CopyTo(array, 0);
@@ -250,9 +284,18 @@ public class Manager : MonoBehaviour
             }
             if (satelliteFuel == 0)
             {
+                GameOver = true;
+                gameRunning = false;
+                //summon gameOver Scene here. 
                 Debug.Log("Game Over!!");
             }
-            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level < 3)
+            if(level > 3 && videoPlayer.time >= videoPlayer.length)
+            {
+                gameRunning = false;
+                //summon credits scene here
+
+            }
+            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3)
             {
                 if (!Lanes.Instance.isPaused)
                 {
