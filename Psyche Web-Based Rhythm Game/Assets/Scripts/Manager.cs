@@ -34,6 +34,9 @@ public class Manager : MonoBehaviour
     public int multiplierTracker;
     public int[] multiplierThresh;
 
+    public GameObject popupTextPrefab; 
+    public float popupDuration = 1f;    
+    public float fadeDuration = 0.5f;
 
     public float satelliteFuel = 100f;
     public static MidiFile[] loadedMidis;
@@ -218,14 +221,57 @@ public class Manager : MonoBehaviour
         gameRunning = true;
         level++;
     }
-    public static void Hit()
+
+    public void CreatePopupText(Vector2 screenPosition, string message)
+    {
+        StartCoroutine(ShowPopup(screenPosition, message));
+    }
+
+    private IEnumerator ShowPopup(Vector2 screenPos, string text)
+    {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            GetComponent<RectTransform>(),
+            screenPos,
+            null,
+            out Vector2 localPoint);
+
+        // Create popup instance
+        GameObject popup = Instantiate(popupTextPrefab, transform);
+        popup.GetComponent<RectTransform>().anchoredPosition = localPoint;
+        Text popupText = popup.GetComponent<Text>();
+        CanvasGroup canvasGroup = popup.GetComponent<CanvasGroup>();
+
+        popupText.text = text;
+        canvasGroup.alpha = 1f;
+
+        yield return new WaitForSeconds(popupDuration);
+
+        float timer = 0f;
+        while (timer < fadeDuration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, timer / fadeDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(popup);
+    }
+    public static void Hit(Vector2 tapPosition)
     {
         pointStreak++;
         Instance.gainFuel();
         //   Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
 
         //Debug.Log("Hit on time");
+        string message = "";
+        if (pointStreak >= 20) message = "PERFECT!";
+        else if (pointStreak >= 10) message = "NICE!";
+        else if (pointStreak >= 5) message = "GOOD!";
 
+        if (!string.IsNullOrEmpty(message))
+        {
+            Instance.CreatePopupText(tapPosition, message);
+        }
         if (Instance.finalMultiplier - 1 < Instance.multiplierThresh.Length)
         {
             Instance.multiplierTracker++;

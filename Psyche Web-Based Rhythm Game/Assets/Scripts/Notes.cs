@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Notes: MonoBehaviour
+public class Notes : MonoBehaviour
 {
     double timeInstantiated;
     public float assignedTime;
@@ -27,11 +27,12 @@ public class Notes: MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else{
-            transform.localPosition = Vector3.Lerp(Vector3.up * Manager.Instance.spawnYCoordinate,Vector3.up * Manager.Instance.despawnYCoordinate, timeFactor);
+        else
+        {
+            transform.localPosition = Vector3.Lerp(Vector3.up * Manager.Instance.spawnYCoordinate, Vector3.up * Manager.Instance.despawnYCoordinate, timeFactor);
             GetComponent<SpriteRenderer>().enabled = true;
-           
-            
+
+
         }
     }
 }
