@@ -46,7 +46,7 @@ public class Manager : MonoBehaviour
     public VideoPlayer videoPlayer;    
     public static bool GameOver = false;  
 
-    public static bool NASACollection = false;
+    public static bool NASACollection = true;
     
     void Start()
     {
@@ -80,7 +80,14 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            if(NASACollection)
+            {
+                midiName = midiNameNASA;
+                videoPlayer.url = Application.streamingAssetsPath + "/PsycheBackgroundNASAVer.mov";
+            }
+            else{
+                videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            }
             StartCoroutine(ReadFromFile());
         }
     }
@@ -104,7 +111,7 @@ public class Manager : MonoBehaviour
             }
             else if(level == 3)
             {
-                satelliteFuel -=3;
+                satelliteFuel -=2;
             }
             if (satelliteFuel < 0)
             {
@@ -132,7 +139,7 @@ public class Manager : MonoBehaviour
         string pathVid;
         if(NASACollection)
         {
-           pathVid = Application.streamingAssetsPath + "/PsycheBackgroundNASAVer.mp4";
+           pathVid = Application.streamingAssetsPath + "/PsycheBackgroundNASAVer.mov";
            midiName = midiNameNASA;
         }
         else
