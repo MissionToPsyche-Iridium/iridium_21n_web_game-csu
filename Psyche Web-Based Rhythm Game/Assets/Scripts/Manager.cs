@@ -296,13 +296,13 @@ public class Manager : MonoBehaviour
                 //summon gameOver Scene here. 
                 Debug.Log("Game Over!!");
             }
-            if(level > 3 && videoPlayer.time >= videoPlayer.length)
+            if(level >= 3 && videoPlayer.time >= videoPlayer.length)
             {
                 gameRunning = false;
                 //summon credits scene here
 
             }
-            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3 && videoPlayer.time < videoPlayer.length)
+            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3 && gameRunning)
             {
                 if (!Lanes.Instance.isPaused)
                 {
