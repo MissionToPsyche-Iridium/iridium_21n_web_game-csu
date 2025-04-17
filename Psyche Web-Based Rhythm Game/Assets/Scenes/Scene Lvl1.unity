@@ -188,7 +188,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -668,7 +668,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -827,7 +827,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1146,7 +1146,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1527,38 +1527,6 @@ PlayableDirector:
     value: {fileID: 661975321}
   - key: {fileID: -6354527536301858055, guid: c95883aeb772afb48849837f04304a1e, type: 2}
     value: {fileID: 1296709726}
-  - key: {fileID: -2692639424004252333, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 294894413}
-  - key: {fileID: 3701863234185289300, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 1835660056}
-  - key: {fileID: 951262005429189049, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 301464561}
-  - key: {fileID: 4125766338852956426, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 816747233}
-  - key: {fileID: -7352674458370118685, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 1950991594}
-  - key: {fileID: 6991874416243468577, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 240240320}
-  - key: {fileID: 3937518396145364933, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 222664614}
-  - key: {fileID: -6776509076464882832, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 230237021}
-  - key: {fileID: 320217428082783925, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 296581605}
-  - key: {fileID: 3002108017927910173, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 1105747941}
-  - key: {fileID: 5286463115732941691, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 661975321}
-  - key: {fileID: -2456147258224482100, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 1296709726}
-  - key: {fileID: -2782204534982403438, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 244510579659355512, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 5485543063788326232, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 7920157838255828942, guid: c95883aeb772afb48849837f04304a1e, type: 2}
-    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &944573192
@@ -1656,7 +1624,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2044,6 +2012,81 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1358206348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1358206349}
+  - component: {fileID: 1358206350}
+  m_Layer: 0
+  m_Name: Scene Lvl1Timeline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1358206349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358206348}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -9719.999}
+  m_LocalScale: {x: 108, y: 108, z: 108}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1874556071}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &1358206350
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358206348}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -6462234232456235025, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 294894413}
+  - key: {fileID: -3581854671979868938, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 1835660056}
+  - key: {fileID: -6996799818761726013, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 301464561}
+  - key: {fileID: 5814811449759768245, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 816747233}
+  - key: {fileID: -7587927824767726223, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 1950991594}
+  - key: {fileID: -3920419639751133201, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 240240320}
+  - key: {fileID: 8592007294734955777, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 222664614}
+  - key: {fileID: -4991419711338547011, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 230237021}
+  - key: {fileID: -8406426915912661990, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 296581605}
+  - key: {fileID: -6384270908786739653, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 1105747941}
+  - key: {fileID: -4765483982630444757, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 661975321}
+  - key: {fileID: -6484389350935369156, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 1296709726}
+  - key: {fileID: -2360715009340075835, guid: eacc35530a920844b909aee2940f1fa4, type: 2}
+    value: {fileID: 1714546432}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &1714546430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,7 +2309,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2367,6 +2410,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1358206349}
   - {fileID: 726082410}
   - {fileID: 294894410}
   - {fileID: 1835660055}
@@ -2518,7 +2562,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

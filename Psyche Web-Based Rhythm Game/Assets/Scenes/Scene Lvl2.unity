@@ -209,7 +209,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -505,7 +505,8 @@ PlayableDirector:
   - key: {fileID: 7920157838255828942, guid: c95883aeb772afb48849837f04304a1e, type: 2}
     value: {fileID: 1221716961}
   m_ExposedReferences:
-    m_References: []
+    m_References:
+    - 42a74d3d1e903094681c01323472b436: {fileID: 1510217904}
 --- !u!4 &612034924
 Transform:
   m_ObjectHideFlags: 0
@@ -635,7 +636,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1225,7 +1226,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1295,6 +1296,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479189122}
   m_CullTransparentMesh: 1
+--- !u!1 &1510217904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510217905}
+  - component: {fileID: 1510217906}
+  m_Layer: 0
+  m_Name: Scene Lvl2Timeline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510217905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510217904}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -9719.999}
+  m_LocalScale: {x: 108, y: 108, z: 108}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2107449940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &1510217906
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510217904}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -2104811878503752852, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1900411149}
+  - key: {fileID: -7549607097162241884, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1588766980}
+  - key: {fileID: -3049742984915002514, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1730435043}
+  - key: {fileID: -1545287795334703571, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1788335749}
+  - key: {fileID: -8887209005787709204, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 482767822}
+  - key: {fileID: -2336517319655822371, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 289742156}
+  - key: {fileID: -6482029823488322632, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1479189124}
+  - key: {fileID: 3234746223104271602, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1068048840}
+  - key: {fileID: 4281016166539355961, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1293419214}
+  - key: {fileID: 9118260321599535577, guid: 4016cdf6c19411249b9f54fa05fea5c0, type: 2}
+    value: {fileID: 1221716961}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &1588766978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1456,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1545,7 +1615,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1780,7 +1850,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1939,7 +2009,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2040,6 +2110,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1510217905}
   - {fileID: 1767074960}
   - {fileID: 1900411148}
   - {fileID: 1588766979}
