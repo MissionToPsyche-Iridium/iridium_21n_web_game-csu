@@ -206,10 +206,8 @@ public class Manager : MonoBehaviour
 
     public void startGame(bool isGameRunning)
     {
-        print($"start Game went");
         if (!isGameRunning)
         {
-            print($"bool in start game went");
             if (level != 0)
             {
                 midiLevel++;
@@ -235,11 +233,16 @@ public class Manager : MonoBehaviour
     while (!videoPlayer.isPrepared)
     {
         yield return null;
-    }         
+    }      
+    if(level == 0 )
+    {
+        NextScene.savedTime = 0;
+    }   
         videoPlayer.time = NextScene.savedTime; 
         videoPlayer.Play(); 
         theSong.clip = clip[level];
-        //theSong.pitch = 10f;
+       // theSong.pitch = 10f;
+       // videoPlayer.playbackSpeed = 10f;
         theSong.Play();     
         gameRunning = true;
         level++;
@@ -248,13 +251,11 @@ public class Manager : MonoBehaviour
     {
         pointStreak++;
         Instance.gainFuel();
-     //   Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
     }
 
     public static void Miss()
     {
         pointStreak = 0;
-      //  Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {gameRunning} vid time: { Instance.videoPlayer.time} ");
     }
 
     public void delayStart()
@@ -262,6 +263,18 @@ public class Manager : MonoBehaviour
         StartVideoDisplay();
         startGame(gameRunning);
     }
+
+    public bool trackEnded()
+    {
+        if(Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     void Update()
     {               
         if(NextScene.backToGame)
@@ -277,9 +290,9 @@ public class Manager : MonoBehaviour
             }
             
         }       
-        if (level > 0 && level < 3 && satelliteFuel != 0 && gameRunning )
-        {
-            if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
+        if (level > 0 && level < 3 && !GameOver && gameRunning )
+            {
+            if (trackEnded())
                 {
                     videoPlayer.Pause();
                     NextScene.savedTime = videoPlayer.time;
@@ -289,22 +302,22 @@ public class Manager : MonoBehaviour
                     }
                 }
             }
+        if(level >= 3 && Math.Round(videoPlayer.time) >= Math.Round(videoPlayer.length))
+            {
+                if (gameRunning)
+                    {
+                        NextScene.Instance.nextScene();
+                    }
+            }
             if (satelliteFuel == 0)
             {
                 GameOver = true;
                 gameRunning = false;
-                //summon gameOver Scene here. 
-                Debug.Log("Game Over!!");
-            }
-            if(level >= 3 && videoPlayer.time >= videoPlayer.length)
-            {
-                gameRunning = false;
-                //summon credits scene here
-
+                NextScene.Instance.GameOverScene();
             }
             if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3 && gameRunning)
             {
-                if (!Lanes.Instance.isPaused)
+                if (!Lanes.Instance.isPaused && !trackEnded())
                 {
                     Lanes.Instance.PauseGame();
                     theSong.Pause();
