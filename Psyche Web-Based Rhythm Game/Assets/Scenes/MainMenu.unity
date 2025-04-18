@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 402653288}
   - component: {fileID: 402653293}
   m_Layer: 5
-  m_Name: SettingsMenu
+  m_Name: OptionsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2197,13 +2197,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Developed by students from the\r\nDepartment of Electrical Engineering
-    and Computer Science\r\nCleveland State University\r\n\r\nTeam \r\nWarren Wu
-    \r\nMaksym Yarosh\r\nEdward Cabrera\r\nDawnielle Hardin\r\n\r\nProject Advisors\r\nSathish
-    Kumar, Cleveland State University\r\nCassie Bowman, NASA Psuche ASU\r\n\r\nMusic
-    by Mark Sparling\r\nhttp://marksparling.com/\r\nTwitter: @MarkyMark665\r\nCreative
-    Commons Attribution\r\n\r\nIn Partnership With\r\nNASA Psyche Mission \u2013
-    psyche.asu.edu\r\n"
+  m_text: "\r\nDepartment of Electrical Engineering and Computer Science\r\nCleveland
+    State University\r\n\r\nTeam \r\nWarren Wu \r\nMaksym YaroshDeveloped by students
+    from the\r\nEdward Cabrera\r\nDawnielle Hardin\r\n\r\nProject Advisors\r\nSathish
+    Kumar, Cleveland State University\r\nCassie Bowman, NASA Psuche ASU\r\n\r\nMusic\n\"De
+    Gasparis's Psyche\" By Rebecca Farmer\n\"Ascension\" and \"Breathless\" By Mitchel
+    Medvec\n\"Day50\" \"Day69\" \"Day15\" By Mark Sparling\r\nhttp://marksparling.com/\r\nTwitter:
+    @MarkyMark665\r\nCreative Commons Attribution\r\n\r\nIn Partnership With\r\nNASA
+    Psyche Mission \u2013 psyche.asu.edu\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
