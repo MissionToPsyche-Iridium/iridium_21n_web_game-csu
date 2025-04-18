@@ -2199,10 +2199,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Developed by students from the\r\nDepartment of Electrical Engineering
     and Computer Science\r\nCleveland State University\r\n\r\nTeam \r\nWarren Wu
-    \r\nMaksym Yarosh\r\nEdward Cabrera\r\nDawnielle Hardin\r\n\r\nProject Advisors\r\n[Name
-    1], [Affiliation]\r\n[Name 2], [Affiliation]\r\n\r\nMusic by Mark Sparling\r\nhttp://marksparling.com/\r\nTwitter:
-    @MarkyMark665\r\nCreative Commons Attribution\r\n\r\nIn Partnership With\r\nNASA
-    Psyche Mission \u2013 psyche.asu.edu\r\n"
+    \r\nMaksym Yarosh\r\nEdward Cabrera\r\nDawnielle Hardin\r\n\r\nProject Advisors\r\nSathish
+    Kumar, Cleveland State University\r\nCassie Bowman, NASA Psuche ASU\r\n\r\nMusic
+    by Mark Sparling\r\nhttp://marksparling.com/\r\nTwitter: @MarkyMark665\r\nCreative
+    Commons Attribution\r\n\r\nIn Partnership With\r\nNASA Psyche Mission \u2013
+    psyche.asu.edu\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -2445,7 +2446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1737768896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3812,7 +3813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2130240344
 MonoBehaviour:
   m_ObjectHideFlags: 0
