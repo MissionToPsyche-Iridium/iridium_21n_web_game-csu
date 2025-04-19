@@ -7,7 +7,9 @@ public class NextScene : MonoBehaviour
     public static bool backToGame =false;
     public static double savedTime = 0;
     public static NextScene Instance;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public static GameObject creditMenu;
+    public static GameObject startMenu;
     void Start()
     {
         Instance = this;
@@ -16,9 +18,6 @@ public class NextScene : MonoBehaviour
     public void nextScene()
     {
        // UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);                                  
-               // yield return Manager.Instance.nextLevel();
-               
-                //add so that it goes back to the game
         if(Manager.level == 1)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Scene Lvl1");   
@@ -27,6 +26,15 @@ public class NextScene : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Scene Lvl2");   
         }
+        else if(Manager.level == 3)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Scene Lvl3");   
+        }
+    }
+
+    public void GameOverScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver"); 
     }
 
     public void gameScene()
@@ -35,12 +43,14 @@ public class NextScene : MonoBehaviour
         {
             backToGame = true;
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game");  
-
-           // Invoke(nameof(Manager.Instance.nextLevel), 0.01f);
         }
-        else if (Manager.level == 3)
+        else if (Manager.level == 3 || Manager.GameOver)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Credits"); 
+            backToGame = true;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            Manager.gameRunning = false;
+            Manager.GameOver = false;
+            Manager.Instance.videoPlayer.time = 0;
         }
     }
 

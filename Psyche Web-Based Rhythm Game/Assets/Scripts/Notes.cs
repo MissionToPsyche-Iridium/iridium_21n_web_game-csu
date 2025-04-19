@@ -8,6 +8,7 @@ public class Notes : MonoBehaviour
     void Start()
     {
         timeInstantiated = Manager.getAudioSourceTime();
+        transform.localPosition = Vector3.up * Manager.Instance.spawnYCoordinate;
     }
     public void PauseNote()
     {
@@ -27,12 +28,9 @@ public class Notes : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else
-        {
-            transform.localPosition = Vector3.Lerp(Vector3.up * Manager.Instance.spawnYCoordinate, Vector3.up * Manager.Instance.despawnYCoordinate, timeFactor);
-            GetComponent<SpriteRenderer>().enabled = true;
-
-
+        else{
+            transform.localPosition = Vector3.Lerp(Vector3.up * Manager.Instance.spawnYCoordinate,Vector3.up * Manager.Instance.despawnYCoordinate, timeFactor);
+            GetComponent<SpriteRenderer>().enabled = true;       
         }
     }
 }
