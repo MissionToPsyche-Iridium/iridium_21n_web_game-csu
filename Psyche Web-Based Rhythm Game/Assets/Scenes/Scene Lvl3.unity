@@ -299,6 +299,38 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 7920157838255828942, guid: c95883aeb772afb48849837f04304a1e, type: 2}
     value: {fileID: 1238369805}
+  - key: {fileID: 7842797733017184008, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -146491700942222507, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8128802941037480195, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4674387797132740425, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3967519425197251748, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2995511070448447750, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1381176740583340180, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1294401663667756540, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7616528915365717032, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5216139263166943475, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2443870007997375221, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2667597123673418904, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8938204316048914202, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8157500644690353977, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4460087284031635421, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1849574561975991030, guid: c95883aeb772afb48849837f04304a1e, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - b90c7d934309e4e449455fe512b73d7d: {fileID: 284031119}
@@ -761,10 +793,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 137871862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0099945, y: 0.000030518}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.010009766, y: 0.000061035156}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547391386
 MonoBehaviour:
