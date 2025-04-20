@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
         // Update button label text
         if (!Manager.NASACollection)
         {
-           GameObjectActive.instance.buttonLabelText.text = "NASA Collection";
+           GameObjectActive.instance.buttonLabelText.text = "NASA Tracks";
             Manager.NASACollection = true;
         }
         else if (Manager.NASACollection)
