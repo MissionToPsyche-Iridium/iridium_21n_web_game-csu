@@ -27,7 +27,7 @@ public class Manager : MonoBehaviour
     public AudioClip[] clip;
     public Image healthBar;
 
-    public float satelliteFuel = 150f;
+    public float satelliteFuel = 100f;
     public static MidiFile[] loadedMidis;
 
     public static int pointStreak = 0;
@@ -99,11 +99,11 @@ public class Manager : MonoBehaviour
 
     public void useFuel()
     {
-        if (satelliteFuel <= 150 && satelliteFuel >= 1 && gameRunning)
+        if (satelliteFuel <= 100 && satelliteFuel >= 1 && gameRunning)
         {
             if(level == 1)
             {
-                satelliteFuel--;
+                satelliteFuel--; 
             }
             else if(level == 2)
             {
@@ -111,26 +111,26 @@ public class Manager : MonoBehaviour
             }
             else if(level == 3)
             {
-                satelliteFuel -=3;
+                satelliteFuel -=2;
             }
             if (satelliteFuel < 0)
             {
                 satelliteFuel = 0;
             }
-            healthBar.fillAmount = satelliteFuel / 150f;
+            healthBar.fillAmount = satelliteFuel / 100f;
         }
     }
 
     public void gainFuel()
     {
-        if (satelliteFuel <= 150 && satelliteFuel >= 1 && gameRunning)
+        if (satelliteFuel <= 100 && satelliteFuel >= 1 && gameRunning)
         {
             satelliteFuel += 2;
-            if (satelliteFuel > 150)
+            if (satelliteFuel > 100)
             {
-                satelliteFuel = 150;
+                satelliteFuel = 100;
             }
-            healthBar.fillAmount = satelliteFuel / 150f;
+            healthBar.fillAmount = satelliteFuel / 100f;
         }
     }
 
@@ -241,8 +241,8 @@ public class Manager : MonoBehaviour
         videoPlayer.time = NextScene.savedTime; 
         videoPlayer.Play(); 
         theSong.clip = clip[level];
-        theSong.pitch = 5f;
-        videoPlayer.playbackSpeed = 5f;
+       // theSong.pitch = 5f;
+       // videoPlayer.playbackSpeed = 5f;
         theSong.Play();     
         gameRunning = true;
         level++;
