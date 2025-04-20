@@ -331,5 +331,24 @@ public class Manager : MonoBehaviour
                 }
             }
         }
+    public Text buttonLabel; // assign in Inspector
+
+    public void ToggleNASACollection()
+    {
+        NASACollection = !NASACollection;
+
+        // Update button label text
+        if (NASACollection)
+        {
+            buttonLabel.text = "NASA Collection";
+        }
+        else
+        {
+            buttonLabel.text = "Regular Tracks";
+        }
+
+        Debug.Log("NASA Collection: " + NASACollection);
+    }
+
 }
 
