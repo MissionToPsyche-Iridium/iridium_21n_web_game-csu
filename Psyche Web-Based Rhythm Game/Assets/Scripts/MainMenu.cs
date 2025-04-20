@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -19,5 +20,24 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ToggleNASACollection()
+    {
+        
+
+        // Update button label text
+        if (!Manager.NASACollection)
+        {
+           GameObjectActive.instance.buttonLabelText.text = "NASA Collection";
+            Manager.NASACollection = true;
+        }
+        else if (Manager.NASACollection)
+        {
+            
+           GameObjectActive.instance.buttonLabelText.text = "Regular Tracks";
+            Manager.NASACollection = false;
+        }
+        Debug.Log("NASA Collection: " + Manager.NASACollection);
     }
 }

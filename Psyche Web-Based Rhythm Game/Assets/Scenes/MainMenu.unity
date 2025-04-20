@@ -577,7 +577,6 @@ GameObject:
   - component: {fileID: 402653289}
   - component: {fileID: 402653288}
   - component: {fileID: 402653293}
-  - component: {fileID: 402653294}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -697,31 +696,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 1859500955}
---- !u!114 &402653294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402653287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be80f6f0b2820b14884140381143e0a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lanes: []
-  theSong: {fileID: 0}
-  marginOfError: 0
-  spawnYCoordinate: 0
-  tapYCoordinate: 0
-  readFromWeb: 0
-  clip: []
-  healthBar: {fileID: 0}
-  satelliteFuel: 100
-  rawImageUI: {fileID: 0}
-  renderTexture: {fileID: 0}
-  videoPlayer: {fileID: 0}
-  buttonLabel: {fileID: 0}
 --- !u!1 &406020951
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMenu: {fileID: 1442841716}
   creditMenu: {fileID: 1737768894}
+  buttonLabelText: {fileID: 1278624247}
 --- !u!1 &515147236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,8 +2182,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 402653294}
-        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+      - m_Target: {fileID: 402653288}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ToggleNASACollection
         m_Mode: 1
         m_Arguments:
