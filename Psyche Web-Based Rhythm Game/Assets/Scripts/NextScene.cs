@@ -47,9 +47,6 @@ public class NextScene : MonoBehaviour
         else if (Manager.level == 3 || Manager.GameOver)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");    
-            Manager.gameRunning = false;
-            Manager.level = 0;  
-            backToGame = false;
         }
     }
 
