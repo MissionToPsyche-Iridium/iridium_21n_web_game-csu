@@ -5,14 +5,13 @@ public class Score : MonoBehaviour
 {
     public static Score Instance;
 
-    public Text scoreText;       // UI Text for displaying score
-    public Text multiplierText;  // UI Text for displaying multiplier
+    public Text scoreText;       
+    public Text multiplierText;  
 
     private int currentScore = 0;
 
-    void Awake()
+    void Start()
     {
-        // Ensure only one instance exists
         if (Instance == null)
         {
             Instance = this;
@@ -23,7 +22,6 @@ public class Score : MonoBehaviour
         }
     }
 
-    // Call this when the player hits a note
     public void AddScore(int points)
     {
         int multiplier = (Manager.pointStreak / 5) + 1;
@@ -31,7 +29,7 @@ public class Score : MonoBehaviour
         UpdateUI();
     }
 
-    // Update the UI text
+
     public void UpdateUI()
     {
         int currentMultiplier = (Manager.pointStreak / 5) + 1;
