@@ -47,7 +47,13 @@ public class Manager : MonoBehaviour
     public static bool GameOver = false;  
 
     public static bool NASACollection = true;
-    
+
+    public Text scoreText;
+    public Text multiplierText;
+    public int finalMultiplier;
+
+ 
+
     void Start()
     {
         //  noteTime = 1;

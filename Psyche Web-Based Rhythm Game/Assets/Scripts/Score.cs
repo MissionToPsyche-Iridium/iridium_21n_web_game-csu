@@ -1,16 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static Score Instance;
+
+    public Text scoreText;       
+    public Text multiplierText;  
+
+    private int currentScore = 0;
+
     void Start()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddScore(int points)
     {
-        
+        int multiplier = (Manager.pointStreak / 5) + 1;
+        currentScore += points * multiplier;
+        UpdateUI();
+    }
+
+
+    public void UpdateUI()
+    {
+        int currentMultiplier = (Manager.pointStreak / 5) + 1;
+        scoreText.text = "Score: " + currentScore.ToString();
+        multiplierText.text = "Multiplier: x" + currentMultiplier.ToString();
     }
 }
