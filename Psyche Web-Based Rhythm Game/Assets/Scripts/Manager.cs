@@ -15,7 +15,8 @@ public class Manager : MonoBehaviour
     public Lanes[] lanes;
     public AudioSource theSong;
     public double marginOfError;
-    private string[] midiName = { "day50.mid", "day69.mid", "day15.mid" };
+    private string[] midiName = { "day50.mid", "day69.mid",  "day15.mid" };
+    private string[] midiNameNASA = {"ascension.mid", "breathless.mid", "degasparis.mid"};
     //public float noteTime;
     public float spawnYCoordinate;
     public float tapYCoordinate;
@@ -42,7 +43,10 @@ public class Manager : MonoBehaviour
     public static MidiFile midiFile;
     public RawImage rawImageUI;       
     public RenderTexture renderTexture;   
-    public VideoPlayer videoPlayer;      
+    public VideoPlayer videoPlayer;    
+    public static bool GameOver = false;  
+
+    public static bool NASACollection = true;
     
     void Start()
     {
@@ -51,6 +55,24 @@ public class Manager : MonoBehaviour
         spawnYCoordinate = 400;
         marginOfError = 0.25;
         Instance = this;
+        if(NASACollection)
+        {
+            clip = new AudioClip[]
+            {
+                Resources.Load<AudioClip>("Songs/ascension"),
+                Resources.Load<AudioClip>("Songs/breathless"),
+                Resources.Load<AudioClip>("Songs/degasparis")
+            };
+        }
+        else
+        {
+            clip = new AudioClip[]
+            {
+                Resources.Load<AudioClip>("Songs/day50"),
+                Resources.Load<AudioClip>("Songs/day69"),
+                Resources.Load<AudioClip>("Songs/day15")
+            };
+        }
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
              StartCoroutine(loadStreamingAsset());
@@ -58,7 +80,14 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            if(NASACollection)
+            {
+                midiName = midiNameNASA;
+                videoPlayer.url = Application.streamingAssetsPath + "/PsycheBackgroundNASAVer.mov";
+            }
+            else{
+                videoPlayer.url = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+            }
             StartCoroutine(ReadFromFile());
         }
     }
@@ -72,7 +101,18 @@ public class Manager : MonoBehaviour
     {
         if (satelliteFuel <= 100 && satelliteFuel >= 1 && gameRunning)
         {
-            satelliteFuel--;
+            if(level == 1)
+            {
+                satelliteFuel--; 
+            }
+            else if(level == 2)
+            {
+                satelliteFuel -= 2;
+            }
+            else if(level == 3)
+            {
+                satelliteFuel -=2;
+            }
             if (satelliteFuel < 0)
             {
                 satelliteFuel = 0;
@@ -96,7 +136,16 @@ public class Manager : MonoBehaviour
 
     private IEnumerator loadStreamingAsset()
     {
-        string pathVid = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+        string pathVid;
+        if(NASACollection)
+        {
+           pathVid = Application.streamingAssetsPath + "/PsycheBackgroundNASAVer.mov";
+           midiName = midiNameNASA;
+        }
+        else
+        {
+            pathVid = Application.streamingAssetsPath + "/fullLevelsPsyche.mp4";
+        }
         videoPlayer.source = VideoSource.Url;
         videoPlayer.url = pathVid;
         videoPlayer.Prepare();
@@ -139,14 +188,6 @@ public class Manager : MonoBehaviour
         {
             midiFile = loadedMidis[level];
         }
-      /*  else if (readFromWeb && level == 1)
-        {
-            midiFile = loadedMidis[1];
-        }
-        else if (readFromWeb && level == 2)
-        {
-            midiFile = loadedMidis[2];
-        }*/
         var notes = midiFile.GetNotes();
         var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
         notes.CopyTo(array, 0);
@@ -165,10 +206,8 @@ public class Manager : MonoBehaviour
 
     public void startGame(bool isGameRunning)
     {
-        print($"start Game went");
         if (!isGameRunning)
         {
-            print($"bool in start game went");
             if (level != 0)
             {
                 midiLevel++;
@@ -194,11 +233,16 @@ public class Manager : MonoBehaviour
     while (!videoPlayer.isPrepared)
     {
         yield return null;
-    }         
+    }      
+    if(level == 0 )
+    {
+        NextScene.savedTime = 0;
+    }   
         videoPlayer.time = NextScene.savedTime; 
         videoPlayer.Play(); 
         theSong.clip = clip[level];
-        //theSong.pitch = 10f;
+       // theSong.pitch = 5f;
+       // videoPlayer.playbackSpeed = 5f;
         theSong.Play();     
         gameRunning = true;
         level++;
@@ -207,13 +251,11 @@ public class Manager : MonoBehaviour
     {
         pointStreak++;
         Instance.gainFuel();
-     //   Debug.Log($"You hit!! Streak: {pointStreak}, midi: {midiLevel} ");
     }
 
     public static void Miss()
     {
         pointStreak = 0;
-      //  Debug.Log($"You missed! Streak reset. {getAudioSourceTime()} - {Instance.theSong.clip.length} level: {level} function: {gameRunning} vid time: { Instance.videoPlayer.time} ");
     }
 
     public void delayStart()
@@ -221,6 +263,18 @@ public class Manager : MonoBehaviour
         StartVideoDisplay();
         startGame(gameRunning);
     }
+
+    public bool trackEnded()
+    {
+        if(Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     void Update()
     {               
         if(NextScene.backToGame)
@@ -236,9 +290,9 @@ public class Manager : MonoBehaviour
             }
             
         }       
-        if (level > 0 && level < 3 && satelliteFuel != 0 && gameRunning )
-        {
-            if (Math.Round(getAudioSourceTime()) >= Math.Round(theSong.clip.length))
+        if (level > 0 && level < 3 && !GameOver && gameRunning )
+            {
+            if (trackEnded())
                 {
                     videoPlayer.Pause();
                     NextScene.savedTime = videoPlayer.time;
@@ -248,13 +302,22 @@ public class Manager : MonoBehaviour
                     }
                 }
             }
+        if(level >= 3 && Math.Round(videoPlayer.time) >= Math.Round(videoPlayer.length))
+            {
+                if (gameRunning)
+                    {
+                        NextScene.Instance.nextScene();
+                    }
+            }
             if (satelliteFuel == 0)
             {
-                Debug.Log("Game Over!!");
+                GameOver = true;
+                gameRunning = false;
+                NextScene.Instance.GameOverScene();
             }
-            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level < 3)
+            if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3 && gameRunning)
             {
-                if (!Lanes.Instance.isPaused)
+                if (!Lanes.Instance.isPaused && !trackEnded())
                 {
                     Lanes.Instance.PauseGame();
                     theSong.Pause();
@@ -268,5 +331,7 @@ public class Manager : MonoBehaviour
                 }
             }
         }
+    
+
 }
 
