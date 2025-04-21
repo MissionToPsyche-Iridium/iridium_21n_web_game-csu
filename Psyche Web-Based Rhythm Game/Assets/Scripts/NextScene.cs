@@ -17,8 +17,7 @@ public class NextScene : MonoBehaviour
 
     
     public void nextScene()
-    {
-       // UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);                                  
+    {                             
         if(Manager.level == 1)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Scene Lvl1");   
@@ -40,28 +39,20 @@ public class NextScene : MonoBehaviour
 
     public void gameScene()
     {
-        if(Manager.level < 3)
+        if(Manager.level < 3 && !Manager.GameOver)
         {
             backToGame = true;
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game");  
         }
         else if (Manager.level == 3 || Manager.GameOver)
         {
-            Manager.level = 0;
-            backToGame = true;
-        //    UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");    
             Manager.gameRunning = false;
-            Manager.GameOver = false;
-            Manager.Instance.videoPlayer.time = 0;
+            Manager.level = 0;  
+            backToGame = false;
         }
     }
-    public void returnToMenu()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
-        menuClicked = true;
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Return))
