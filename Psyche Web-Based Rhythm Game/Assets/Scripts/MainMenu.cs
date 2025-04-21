@@ -6,8 +6,11 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Intro Scene");
         Manager.GameOver = false;
+        Manager.level = 0; 
+        NextScene.backToGame = false;
+        Manager.midiLevel = 0;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Intro Scene");
     }
     public void QuitGame()
     {
