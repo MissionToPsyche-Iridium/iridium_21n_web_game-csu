@@ -46,12 +46,17 @@ public class NextScene : MonoBehaviour
         }
         else if (Manager.level == 3 || Manager.GameOver)
         {
+            Manager.level = 0;
             backToGame = true;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        //    UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
             Manager.gameRunning = false;
             Manager.GameOver = false;
             Manager.Instance.videoPlayer.time = 0;
         }
+    }
+    public void returnToMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     // Update is called once per frame
