@@ -9,8 +9,16 @@ public class MainMenu : MonoBehaviour
         if(Manager.level == 3 || Manager.GameOver)
         {
             Manager.level = 0;
-            GameObjectActive.instance.startMenu.SetActive(false);
-            GameObjectActive.instance.creditMenu.SetActive(true);
+            Manager.gameRunning = false;
+            Manager.GameOver = false;
+           
+            if (NextScene.menuClicked)
+            {
+                GameObjectActive.instance.startMenu.SetActive(false);
+                GameObjectActive.instance.creditMenu.SetActive(true);
+                NextScene.menuClicked = false;
+
+            }
         }
     }
     public void PlayGame()

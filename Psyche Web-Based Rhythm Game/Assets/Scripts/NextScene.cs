@@ -7,7 +7,7 @@ public class NextScene : MonoBehaviour
     public static bool backToGame =false;
     public static double savedTime = 0;
     public static NextScene Instance;
-
+    public static bool menuClicked = false;
     public static GameObject creditMenu;
     public static GameObject startMenu;
     void Start()
@@ -15,6 +15,7 @@ public class NextScene : MonoBehaviour
         Instance = this;
     }
 
+    
     public void nextScene()
     {
        // UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);                                  
@@ -57,6 +58,7 @@ public class NextScene : MonoBehaviour
     public void returnToMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        menuClicked = true;
     }
 
     // Update is called once per frame
