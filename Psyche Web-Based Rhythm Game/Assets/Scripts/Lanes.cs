@@ -78,8 +78,7 @@ public class Lanes : MonoBehaviour
             {
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
-                    Vector2 tapPosition = Input.mousePosition;
-                    Manager.Hit(tapPosition);
+                    Manager.Hit();
                     Destroy(notes[inputIndex].gameObject);
                     inputIndex++;
                 }
