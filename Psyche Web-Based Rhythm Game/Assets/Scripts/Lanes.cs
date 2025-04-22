@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Melanchall.DryWetMidi.Interaction;
-using TMPro;
 using UnityEngine;
 
 public class Lanes : MonoBehaviour
@@ -79,9 +78,12 @@ public class Lanes : MonoBehaviour
             {
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
-                    Manager.Hit();
+                    Vector3 pos = Manager.Instance.scorePopText.GetComponent<RectTransform>().position;
+                    pos.x = notes[inputIndex].GetComponent<RectTransform>().position.x;
+                    Manager.Instance.scorePopText.GetComponent<RectTransform>().position = pos;
+                    Manager.Hit();                 
                     Destroy(notes[inputIndex].gameObject);
-                    inputIndex++;
+                    inputIndex++;              
                 }
             }
             if (timeStamp + marginOfError <= audioTime)
