@@ -55,7 +55,7 @@ public class Manager : MonoBehaviour
     public TextMeshProUGUI multiplierText;
     public int finalMultiplier;
     public int multiplierTracker;
-
+    public int[] multiplierThresh;
  
 
     void Start()
@@ -64,6 +64,7 @@ public class Manager : MonoBehaviour
         scoreText.text = "Score: 0";
         multiplierText.text = "Multiplier: x1";
         finalMultiplier = 1;
+        multiplierThresh = new int[] { 2, 4, 6 };
         tapYCoordinate = -271;
         spawnYCoordinate = 400;
         marginOfError = 0.25;
@@ -267,6 +268,18 @@ public class Manager : MonoBehaviour
         Instance.finalScore += Instance.scorePerHit * Instance.finalMultiplier;
         Instance.scoreText.text = "Score: " + Instance.finalScore;
         Instance.multiplierText.text = "Multiplier: x" + Instance.finalMultiplier;
+        
+        if (Instance.finalMultiplier - 1 < Instance.multiplierThresh.Length)
+        {
+            Instance.multiplierTracker++;
+
+            if (Instance.multiplierThresh[Instance.finalMultiplier - 1] <= Instance.multiplierTracker)
+            {
+                Instance.multiplierTracker = 0;
+                Instance.finalMultiplier++;
+            }
+        }
+
     }
 
     public static void Miss()
@@ -294,6 +307,23 @@ public class Manager : MonoBehaviour
         }
     }
 
+    public void callGameOver()
+    {
+        GameOver = true;
+        gameRunning = false;
+        NextScene.Instance.GameOverScene();
+    }
+
+    public void callNextScene()
+    {
+        videoPlayer.Pause();
+        NextScene.savedTime = videoPlayer.time;
+        if (gameRunning)
+        {
+            NextScene.Instance.nextScene();
+        }
+    }
+
     void Update()
     {               
         if(NextScene.backToGame)
@@ -313,11 +343,21 @@ public class Manager : MonoBehaviour
             {
             if (trackEnded())
                 {
-                    videoPlayer.Pause();
-                    NextScene.savedTime = videoPlayer.time;
-                    if (gameRunning)
+                    if(level == 1 && finalScore > 3000)
                     {
-                        NextScene.Instance.nextScene();
+                        callNextScene();
+                    }
+                    else if(level == 2 && finalScore > 5000)
+                    {
+                        callNextScene();
+                    }
+                    else if (level == 3 && finalScore > 10000)
+                    {
+                        callNextScene();
+                    }
+                    else
+                    {
+                        callGameOver();
                     }
                 }
             }
@@ -330,9 +370,7 @@ public class Manager : MonoBehaviour
             }
             if (satelliteFuel == 0)
             {
-                GameOver = true;
-                gameRunning = false;
-                NextScene.Instance.GameOverScene();
+                callGameOver();
             }
             if (Input.GetKeyDown(KeyCode.Escape) && level > 0 && level <= 3 && gameRunning)
             {
