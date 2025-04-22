@@ -8,6 +8,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
@@ -48,15 +49,21 @@ public class Manager : MonoBehaviour
 
     public static bool NASACollection = true;
 
-    public Text scoreText;
-    public Text multiplierText;
+    public int finalScore;
+    public int scorePerHit = 100;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI multiplierText;
     public int finalMultiplier;
+    public int multiplierTracker;
 
  
 
     void Start()
     {
         //  noteTime = 1;
+        scoreText.text = "Score: 0";
+        multiplierText.text = "Multiplier: x1";
+        finalMultiplier = 1;
         tapYCoordinate = -271;
         spawnYCoordinate = 400;
         marginOfError = 0.25;
@@ -257,11 +264,17 @@ public class Manager : MonoBehaviour
     {
         pointStreak++;
         Instance.gainFuel();
+        Instance.finalScore += Instance.scorePerHit * Instance.finalMultiplier;
+        Instance.scoreText.text = "Score: " + Instance.finalScore;
+        Instance.multiplierText.text = "Multiplier: x" + Instance.finalMultiplier;
     }
 
     public static void Miss()
     {
         pointStreak = 0;
+        Instance.finalMultiplier = 1;
+        Instance.multiplierTracker = 0;
+        Instance.multiplierText.text = "Multiplier: x" + Instance.finalMultiplier;
     }
 
     public void delayStart()
