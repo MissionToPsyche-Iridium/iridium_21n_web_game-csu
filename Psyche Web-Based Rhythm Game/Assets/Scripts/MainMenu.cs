@@ -4,17 +4,12 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    void Start()
-    {
-        if(Manager.level == 3 || Manager.GameOver)
-        {
-            Manager.level = 0;
-            GameObjectActive.instance.startMenu.SetActive(false);
-            GameObjectActive.instance.creditMenu.SetActive(true);
-        }
-    }
     public void PlayGame()
     {
+        Manager.GameOver = false;
+        Manager.level = 0; 
+        NextScene.backToGame = false;
+        Manager.midiLevel = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Intro Scene");
     }
     public void QuitGame()
@@ -24,9 +19,6 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleNASACollection()
     {
-        
-
-        // Update button label text
         if (!Manager.NASACollection)
         {
            GameObjectActive.instance.buttonLabelText.text = "NASA Tracks";

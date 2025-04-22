@@ -247,7 +247,7 @@ public class Manager : MonoBehaviour
         videoPlayer.time = NextScene.savedTime; 
         videoPlayer.Play(); 
         theSong.clip = clip[level];
-       // theSong.pitch = 5f;
+       // theSong.pitch = 10f;
        // videoPlayer.playbackSpeed = 5f;
         theSong.Play();     
         gameRunning = true;
