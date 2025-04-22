@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Melanchall.DryWetMidi.Interaction;
+using TMPro;
 using UnityEngine;
 
 public class Lanes : MonoBehaviour

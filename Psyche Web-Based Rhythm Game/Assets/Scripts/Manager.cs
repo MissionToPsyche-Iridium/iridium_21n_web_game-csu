@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Manager : MonoBehaviour
 {
@@ -56,11 +57,15 @@ public class Manager : MonoBehaviour
     public int finalMultiplier;
     public int multiplierTracker;
     public int[] multiplierThresh;
+    public TextMeshProUGUI scorePopText;
+    public float popupDuration = 1f;
+
  
 
     void Start()
     {
         //  noteTime = 1;
+        scorePopText.gameObject.SetActive(false);
         scoreText.text = "Score: 0";
         multiplierText.text = "Multiplier: x1";
         finalMultiplier = 1;
@@ -261,9 +266,29 @@ public class Manager : MonoBehaviour
         gameRunning = true;
         level++;
     }
+
+    public void hideTextPop()
+    {
+        scorePopText.gameObject.SetActive(false);
+    }
     public static void Hit()
     {
         pointStreak++;
+        if(Instance.finalMultiplier == 1)
+        {
+            Instance.scorePopText.text = "Good!";
+        }
+        else if(Instance.finalMultiplier == 2)
+        {
+            Instance.scorePopText.text = "Great!";
+        }
+        else if(Instance.finalMultiplier == 4)
+        {
+            Instance.scorePopText.text = "Perfect!";
+        }
+        Instance.scorePopText.gameObject.SetActive(true);
+        Instance.Invoke(nameof(hideTextPop), 0.5f);
+
         Instance.gainFuel();
         Instance.finalScore += Instance.scorePerHit * Instance.finalMultiplier;
         Instance.scoreText.text = "Score: " + Instance.finalScore;
