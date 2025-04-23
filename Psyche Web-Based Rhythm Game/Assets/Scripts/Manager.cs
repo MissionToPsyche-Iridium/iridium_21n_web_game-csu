@@ -318,7 +318,7 @@ public class Manager : MonoBehaviour
         }
         
         Instance.scorePopText.gameObject.SetActive(true);
-        Instance.Invoke(nameof(hideTextPop), 0.5f);
+        Instance.Invoke(nameof(hideTextPop), 0.2f);
 
         Instance.gainFuel();
         Instance.finalScore += Instance.scorePerHit * Instance.finalMultiplier;
