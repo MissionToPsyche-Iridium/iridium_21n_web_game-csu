@@ -248,18 +248,37 @@ public class Manager : MonoBehaviour
 
     yield return StartCoroutine(getDataFromMidi());
     videoPlayer.Prepare();
-       if(level == 0)
+        if (NASACollection)
         {
-            goalScoreLevel = 20000;
+            if (level == 0)
+            {
+                goalScoreLevel = 20000;
+            }
+            if (level == 1)
+            {
+                goalScoreLevel = 37500;
+            }
+            if (level == 2)
+            {
+                goalScoreLevel = 32000;
+            }
         }
-        if(level == 1)
+        if (!NASACollection)
         {
-            goalScoreLevel = 37500;
+            if (level == 0)
+            {
+                goalScoreLevel = 80000;
+            }
+            if (level == 1)
+            {
+                goalScoreLevel = 55000;
+            }
+            if (level == 2)
+            {
+                goalScoreLevel = 55000;
+            }
         }
-        if (level == 2)
-        {
-            goalScoreLevel = 20000;
-        }
+
         goalScore.text = "Goal: " + goalScoreLevel.ToString();
 
     while (!videoPlayer.isPrepared)
