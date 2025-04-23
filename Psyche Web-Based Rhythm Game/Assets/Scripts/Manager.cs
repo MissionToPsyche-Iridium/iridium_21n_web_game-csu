@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
 
 public class Manager : MonoBehaviour
 {
