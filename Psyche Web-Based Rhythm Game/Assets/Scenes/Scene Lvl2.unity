@@ -209,8 +209,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255613
-  m_fontColor: {r: 0.9907825, g: 1, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -368,8 +368,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255615
-  m_fontColor: {r: 0.9997537, g: 1, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -636,8 +636,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255359
-  m_fontColor: {r: 1, g: 0.99722207, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -742,7 +742,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 150
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -930,8 +930,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255602
-  m_fontColor: {r: 0.9486351, g: 1, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1226,8 +1226,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255612
-  m_fontColor: {r: 0.9879937, g: 1, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1456,8 +1456,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255607
-  m_fontColor: {r: 0.9680898, g: 1, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1615,8 +1615,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278321134
-  m_fontColor: {r: 0.932579, g: 1, b: 0.0056602955, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1850,8 +1850,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255598
-  m_fontColor: {r: 0.93317235, g: 1, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2009,8 +2009,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255596
-  m_fontColor: {r: 0.9262066, g: 1, b: 0, a: 1}
+    rgba: 4292120922
+  m_fontColor: {r: 0.3529412, g: 0.5686275, b: 0.83137256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2242,7 +2242,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: d3c9eeb1b43ad4f498f8c23f6dee1ceb, type: 3}
   m_Resource: {fileID: 8300000, guid: d3c9eeb1b43ad4f498f8c23f6dee1ceb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.025
+  m_Volume: 0.015
   m_Pitch: -1.25
   Loop: 1
   Mute: 0
