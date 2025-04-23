@@ -58,7 +58,6 @@ public class Manager : MonoBehaviour
     public int multiplierTracker;
     public int[] multiplierThresh;
     public TextMeshProUGUI scorePopText;
-    public float popupDuration = 1f;
 
  
 
@@ -286,6 +285,7 @@ public class Manager : MonoBehaviour
         {
             Instance.scorePopText.text = "Perfect!";
         }
+        
         Instance.scorePopText.gameObject.SetActive(true);
         Instance.Invoke(nameof(hideTextPop), 0.5f);
 
