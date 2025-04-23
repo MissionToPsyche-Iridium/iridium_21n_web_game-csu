@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Tilemaps;
 
 public class Manager : MonoBehaviour
 {
@@ -58,7 +59,8 @@ public class Manager : MonoBehaviour
     public int multiplierTracker;
     public int[] multiplierThresh;
     public TextMeshProUGUI scorePopText;
-
+    public TextMeshProUGUI goalScore;
+    private int goalScoreLevel;
  
 
     void Start()
@@ -120,7 +122,7 @@ public class Manager : MonoBehaviour
         if (satelliteFuel <= 100 && satelliteFuel >= 1 && gameRunning)
         {
             if(level == 1)
-            {
+            {     
                 satelliteFuel--; 
             }
             else if(level == 2)
@@ -247,6 +249,19 @@ public class Manager : MonoBehaviour
 
     yield return StartCoroutine(getDataFromMidi());
     videoPlayer.Prepare();
+       if(level == 0)
+        {
+            goalScoreLevel = 20000;
+        }
+        if(level == 1)
+        {
+            goalScoreLevel = 37500;
+        }
+        if (level == 2)
+        {
+            goalScoreLevel = 20000;
+        }
+        goalScore.text = "Goal: " + goalScoreLevel.ToString();
 
     while (!videoPlayer.isPrepared)
     {
@@ -259,8 +274,6 @@ public class Manager : MonoBehaviour
         videoPlayer.time = NextScene.savedTime; 
         videoPlayer.Play(); 
         theSong.clip = clip[level];
-       // theSong.pitch = 10f;
-       // videoPlayer.playbackSpeed = 5f;
         theSong.Play();     
         gameRunning = true;
         level++;
@@ -368,15 +381,15 @@ public class Manager : MonoBehaviour
             {
             if (trackEnded())
                 {
-                    if(level == 1 && finalScore > 20000)
+                    if(level == 1 && finalScore > goalScoreLevel)
                     {
                         callNextScene();
                     }
-                    else if(level == 2 && finalScore > 37500)
+                    else if(level == 2 && finalScore > goalScoreLevel)
                     {
                         callNextScene();
                     }
-                    else if (level == 3 && finalScore > 20000)
+                    else if (level == 3 && finalScore > goalScoreLevel)
                     {
                         callNextScene();
                     }
