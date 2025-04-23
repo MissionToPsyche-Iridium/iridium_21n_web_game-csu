@@ -368,15 +368,15 @@ public class Manager : MonoBehaviour
             {
             if (trackEnded())
                 {
-                    if(level == 1 && finalScore > 3000)
+                    if(level == 1 && finalScore > 20000)
                     {
                         callNextScene();
                     }
-                    else if(level == 2 && finalScore > 5000)
+                    else if(level == 2 && finalScore > 37500)
                     {
                         callNextScene();
                     }
-                    else if (level == 3 && finalScore > 10000)
+                    else if (level == 3 && finalScore > 20000)
                     {
                         callNextScene();
                     }
