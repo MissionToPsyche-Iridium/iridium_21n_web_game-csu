@@ -6,10 +6,8 @@ using UnityEngine.Networking;
 using System.IO;
 using System;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
-using Unity.VisualScripting;
 
 public class Manager : MonoBehaviour
 {
@@ -19,7 +17,6 @@ public class Manager : MonoBehaviour
     public double marginOfError;
     private string[] midiName = { "day50.mid", "day69.mid",  "day15.mid" };
     private string[] midiNameNASA = {"ascension.mid", "breathless.mid", "degasparis.mid"};
-    //public float noteTime;
     public float spawnYCoordinate;
     public float tapYCoordinate;
     public static bool gameRunning;
@@ -28,7 +25,6 @@ public class Manager : MonoBehaviour
     public static int midiLevel = 0;
     public AudioClip[] clip;
     public Image healthBar;
-
     public float satelliteFuel = 100f;
     public static MidiFile[] loadedMidis;
 
@@ -47,9 +43,7 @@ public class Manager : MonoBehaviour
     public RenderTexture renderTexture;   
     public VideoPlayer videoPlayer;    
     public static bool GameOver = false;  
-
     public static bool NASACollection = true;
-
     public int finalScore;
     public int scorePerHit = 100;
     public TextMeshProUGUI scoreText;
@@ -64,7 +58,6 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
-        //  noteTime = 1;
         scorePopText.gameObject.SetActive(false);
         scoreText.text = "Score: 0";
         multiplierText.text = "Multiplier: x1";
@@ -444,7 +437,5 @@ public class Manager : MonoBehaviour
                 }
             }
         }
-    
-
 }
 
