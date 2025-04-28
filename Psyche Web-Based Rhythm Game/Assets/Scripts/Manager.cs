@@ -264,11 +264,11 @@ public class Manager : MonoBehaviour
             }
             if (level == 1)
             {
-                goalScoreLevel = 35000;
+                goalScoreLevel = 40000;
             }
             if (level == 2)
             {
-                goalScoreLevel = 35000;
+                goalScoreLevel = 40000;
             }
         }
 
