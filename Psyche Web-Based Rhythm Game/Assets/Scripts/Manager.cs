@@ -43,7 +43,7 @@ public class Manager : MonoBehaviour
     public RenderTexture renderTexture;   
     public VideoPlayer videoPlayer;    
     public static bool GameOver = false;  
-    public static bool NASACollection = true;
+    public static bool NASACollection = false;
     public int finalScore;
     public int scorePerHit = 100;
     public TextMeshProUGUI scoreText;
@@ -260,15 +260,15 @@ public class Manager : MonoBehaviour
         {
             if (level == 0)
             {
-                goalScoreLevel = 80000;
+                goalScoreLevel = 60000;
             }
             if (level == 1)
             {
-                goalScoreLevel = 55000;
+                goalScoreLevel = 35000;
             }
             if (level == 2)
             {
-                goalScoreLevel = 55000;
+                goalScoreLevel = 35000;
             }
         }
 

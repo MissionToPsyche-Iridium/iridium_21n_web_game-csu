@@ -1075,8 +1075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced3ae4c80bff324dacee51ac17c2db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenu: {fileID: 1442841716}
-  creditMenu: {fileID: 1737768894}
   buttonLabelText: {fileID: 1278624247}
 --- !u!1 &515147236
 GameObject:
@@ -1521,7 +1519,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c6dda78dff06e3f4089fafe985f17797, type: 3}
   m_Resource: {fileID: 8300000, guid: c6dda78dff06e3f4089fafe985f17797, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.025
+  m_Volume: 0.37
   m_Pitch: -1.25
   Loop: 1
   Mute: 0
