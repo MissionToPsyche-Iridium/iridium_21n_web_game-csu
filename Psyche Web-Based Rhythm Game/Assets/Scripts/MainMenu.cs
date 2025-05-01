@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -12,11 +10,6 @@ public class MainMenu : MonoBehaviour
         Manager.midiLevel = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Intro Scene");
     }
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
     public void ToggleNASACollection()
     {
         if (!Manager.NASACollection)

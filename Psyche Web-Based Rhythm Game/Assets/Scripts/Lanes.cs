@@ -51,11 +51,10 @@ public class Lanes : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isPaused)
-            return; // Stop everything when paused
+            return; 
 
         if (spawnCount < timeStamps.Count)
         {
