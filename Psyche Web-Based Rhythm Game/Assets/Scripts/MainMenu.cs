@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+
+    void Start()
+    {
+         if (!Manager.NASACollection)
+        {
+           GameObjectActive.instance.buttonLabelText.text = "Regular Tracks";
+        }
+        else if (Manager.NASACollection)
+        {         
+           GameObjectActive.instance.buttonLabelText.text = "NASA Tracks";
+        }
+    }
     public void PlayGame()
     {
         Manager.GameOver = false;
@@ -23,6 +35,5 @@ public class MainMenu : MonoBehaviour
            GameObjectActive.instance.buttonLabelText.text = "Regular Tracks";
             Manager.NASACollection = false;
         }
-        Debug.Log("NASA Collection: " + Manager.NASACollection);
     }
 }
