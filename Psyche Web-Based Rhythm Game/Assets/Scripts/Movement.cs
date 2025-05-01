@@ -35,9 +35,6 @@ public class Movement : MonoBehaviour
         buttonS = lane2.transform.position.x;
     }
 
-    
-
-// rotates the spaceship along its x-axis for .2 seconds. 
      private IEnumerator ScaleTransform()
     {
         Vector3 initialScale = transform.localScale;
@@ -48,26 +45,21 @@ public class Movement : MonoBehaviour
             elapsedTime += Time.deltaTime;
             var t = elapsedTime / duration;
             transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
-            // Wait for the next frame
             yield return null;
         }
     }
 
-// resets the x local scale of the spaceship to the original to allow an "animation" of the it rotation on its x axis. 
     public void resetScale()
     {
         rigidbody2D.transform.localScale = startScale;
     }
 
-// Updates movement of the spaceship according to the button pressed. The button is passed as a parameter. 
     public void updateMovement(float direction)
     {
         
         rigidbody2D.transform.position = new Vector3(direction, startPosition.y, startPosition.z);
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.A))

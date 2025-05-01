@@ -1,15 +1,10 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
     public static bool backToGame =false;
     public static double savedTime = 0;
     public static NextScene Instance;
-    public static bool menuClicked = false;
-    public static GameObject creditMenu;
-    public static GameObject startMenu;
     void Start()
     {
         Instance = this;
